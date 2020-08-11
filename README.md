@@ -1,4 +1,6 @@
-# Explore PIXI v5
+# Arcade · Early experiments with PIXI.js
+
+Restoration of a Pacman Arcade Cocktail table — Karateco 1984
 
 ## Objectives
 
