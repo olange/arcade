@@ -1,0 +1,17 @@
+{
+  "name": "dpac-engine",
+  "version": "1.0.0",
+  "description": "Distributed Puckman contact server",
+  "main": "index.js",
+  "scripts": {
+    "server": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "apollo-server": "^2.16.1",
+    "graphql": "^15.3.0"
+  }
+}
