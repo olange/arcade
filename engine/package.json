@@ -1,11 +1,13 @@
 {
-  "name": "dpac-engine",
+  "name": "arcade-engine",
   "version": "1.0.0",
-  "description": "Distributed Puckman contact server",
+  "description": "Distributed Arcade game engine",
   "main": "index.js",
   "scripts": {
-    "server": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "docker build -t olange/arcade-engine .",
+    "server": "docker run --name arcade-engine -p 4000:4000 -d olange/arcade-engine"
   },
   "keywords": [],
   "author": "",
