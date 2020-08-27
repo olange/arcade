@@ -1,16 +1,21 @@
 {
   "name": "arcade-engine",
   "version": "1.0.0",
-  "description": "Distributed Arcade game engine",
+  "description": "Distributed Arcade Game Engine",
   "main": "index.js",
   "scripts": {
     "dev": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "docker build -t olange/arcade-engine .",
-    "server": "docker run --name arcade-engine -p 4000:4000 -d olange/arcade-engine"
+    "build": "DOCKER_BUILDKIT=1 docker build --tag olange/arcade-engine .",
+    "server": "docker run --detach --name arcade-engine --publish 4000:4000 olange/arcade-engine"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "arcade",
+    "game",
+    "distributed",
+    "graph"
+  ],
+  "author": "Olivier Lange",
   "license": "Apache-2.0",
   "dependencies": {
     "apollo-server": "^2.16.1",

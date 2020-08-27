@@ -1,5 +1,5 @@
-FROM node:12
-WORKDIR /usr/src/app
+FROM node:latest
+WORKDIR /srv/app
 
 COPY package*.json ./
 RUN npm install --production
