@@ -4,6 +4,6 @@ node_modules/
 # Logs
 npm-debug.log*
 
-# OS generated files
+# System generated files
 .DS_Store
 Thumbs.db
