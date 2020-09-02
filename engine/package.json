@@ -18,7 +18,7 @@
   "author": "Olivier Lange",
   "license": "Apache-2.0",
   "dependencies": {
-    "apollo-server": "^2.16.1",
+    "apollo-server": "^2.17.0",
     "graphql": "^15.3.0"
   }
 }
