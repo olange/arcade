@@ -1,5 +1,26 @@
 import { LitElement, html, css } from 'lit-element';
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import { openWcLogo } from './open-wc-logo.js';
+
+console.info( "ARCADE› Instantiating Apollo Client…");
+const client = new ApolloClient({
+  uri: 'http://localhost:4000',
+  cache: new InMemoryCache()
+});
+
+const BOOKS_QUERY = gql`
+  query GetBooks {
+    books {
+        title
+      rating
+      author
+    }
+  }`;
+
+console.info( "ARCADE› Looking up available books…");
+client
+  .query({ query: BOOKS_QUERY })
+  .then( result => console.log( result));
 
 export class ArcadeApp extends LitElement {
   static get properties() {
