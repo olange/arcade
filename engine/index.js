@@ -32,6 +32,12 @@ const books = [
     author: 'Michael Crichton',
     rating: 4
   },
+  {
+    title: 'The Plague',
+    author: 'Albert Camus',
+    rating: 10
+  },
+
 ];
 
 // Resolvers define the technique for fetching the types defined in the

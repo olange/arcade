@@ -4,10 +4,11 @@
   "description": "Distributed Arcade Game Engine",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "DOCKER_BUILDKIT=1 docker build --tag olange/arcade-engine .",
-    "server": "docker run --detach --name arcade-engine --publish 4000:4000 olange/arcade-engine"
+    "start": "node index.js",
+    "test":  "echo \"Error: no test specified\" && exit 1",
+    "docker:build": "DOCKER_BUILDKIT=1 docker build --tag olange/arcade-engine .",
+    "docker:start": "docker run --detach --name arcade-engine --publish 4000:4000 olange/arcade-engine",
+    "docker:stop":  "docker rm -f $(docker ps -a --filter 'name=arcade-engine' -q)"
   },
   "keywords": [
     "arcade",
