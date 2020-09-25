@@ -2,6 +2,8 @@ import { LitElement, html, css } from "lit-element";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { openWcLogo } from "./open-wc-logo.js";
 
+import { ArcadeBooks } from "./arcade-books.js";
+
 console.info("ARCADE› Instantiating Apollo Client…");
 const client = new ApolloClient({
   uri: "http://localhost:4000",
@@ -48,13 +50,12 @@ export class ArcadeApp extends LitElement {
 
   fetchBooks() {
     console.log("fetchBooks: Looking up available books…");
-    client
-      .query({ query: BOOKS_QUERY })
-      .then((result) => {
-        console.log("result:", result);
-        console.log("result.data:", result.data);
-        this.books = result.data;
-      });
+    client.query({ query: BOOKS_QUERY }).then((result) => {
+      console.log("result:", result);
+      console.log("result.data:", result.data);
+      console.log("result.data.books:", result.data.books);
+      this.books = result.data.books;
+    });
   }
 
   static get styles() {
@@ -110,14 +111,15 @@ export class ArcadeApp extends LitElement {
   }
 
   render() {
+    console.log(`ArcadeApp.render: ${this.books.length}`);
+    const htmlBooks = html`<pre>${JSON.stringify(this.books, null, 2)}</pre>`;
     return html`
       <main>
         <div class="logo">${openWcLogo}</div>
         <h1>${this.title}</h1>
-
-        ${this.books
-          ? html`<pre>${JSON.stringify(this.books, null, 2)}</pre>`
-          : html`<p>Loading…</p>`}
+        ONE ${this.books ? htmlBooks : html`<p>Loading…</p>`}
+        TWO
+        <arcade-books .books=${this.books}></arcade-books>
       </main>
 
       <p class="app-footer">
