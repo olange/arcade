@@ -42,18 +42,10 @@ export class ArcadeApp extends LitElement {
     }
   }
 
-  async fetchBooks1() {
-    const response = await fetch("https://api.openbrewerydb.org/breweries");
-    const jsonResponse = await response.json();
-    this.books = jsonResponse;
-  }
-
   fetchBooks() {
     console.log("fetchBooks: Looking up available books…");
     client.query({ query: BOOKS_QUERY }).then((result) => {
-      console.log("result:", result);
-      console.log("result.data:", result.data);
-      console.log("result.data.books:", result.data.books);
+      console.log("client.query: result.data.books:", result.data.books);
       this.books = result.data.books;
     });
   }
@@ -111,15 +103,19 @@ export class ArcadeApp extends LitElement {
   }
 
   render() {
-    console.log(`ArcadeApp.render: ${this.books.length}`);
-    const htmlBooks = html`<pre>${JSON.stringify(this.books, null, 2)}</pre>`;
+    console.log(`ArcadeApp.render: this.books=`, this.books);
+    const htmlBooks = html`<div>
+      ONE
+      <pre>${JSON.stringify(this.books, null, 2)}</pre>
+      TWO
+      <arcade-books .books=${this.books}></arcade-books>
+    </div> `;
+    const htmlLoading = html`<p>Loading… possibly a network error</p>`;
     return html`
       <main>
         <div class="logo">${openWcLogo}</div>
         <h1>${this.title}</h1>
-        ONE ${this.books ? htmlBooks : html`<p>Loading…</p>`}
-        TWO
-        <arcade-books .books=${this.books}></arcade-books>
+        ${this.books ? htmlBooks : htmlLoading}
       </main>
 
       <p class="app-footer">
