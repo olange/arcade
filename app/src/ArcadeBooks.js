@@ -1,47 +1,82 @@
+import { throwServerError } from "@apollo/client";
 import { LitElement, html } from "lit-element";
 
 export class ArcadeBooks extends LitElement {
   static get properties() {
     return {
       books: { type: Array },
+      expanded: { type: Boolean },
     };
   }
 
   constructor() {
     super();
-
     this.books = [];
+    this.expanded = false;
   }
 
   render() {
     console.log(`ArcadeBooks.render: ${this.books.length}`);
+    const htmlButton = this.htmlButton();
+    const htmlBooks = html`
+      ${this.books.map(
+        (book) => html`<arcade-book .book=${book}></arcade-book>`
+      )}
+    `;
+
     return html`
       ArcadeBooks:
-      <ul style='background-color: beige'>
-        ${this.books.map(
-          (book) => html`<arcade-book .book=${book}></arcade-book>`
-        )}
-      </ul>
+      <div style="background-color: beige">
+        ${htmlButton} ${this.expanded ? htmlBooks : ""}
+      </div>
     `;
   }
+
+  // TODO move into a component
+  htmlButton() {
+    return html` <button
+      id="mybutton"
+      @click="${() => {
+        this.expanded = !this.expanded;
+        console.log(this.expanded);
+      }}"
+    >
+      ${this.expanded ? html`&#x25b2` : html`&#x25bc`}
+    </button>`;
+  }
 }
-
-// ${this.books.map((book) => html` <li>${book.author}: ${book.title}</li>`)}
-
-// ${this.books.map((book) => html`<arcade-book .book=${book}></arcade-book>`)}
 
 class ArcadeBook extends LitElement {
   static get properties() {
     return {
       book: { type: Object },
+      expanded: { type: Boolean },
     };
   }
   constructor() {
     super();
+    this.expanded = false;
   }
 
   render() {
-    return html`<li>${this.book.author}: ${this.book.title}</li>`;
+    const htmlButton = this.htmlButton();
+    const htmlDetail = html`<div>${this.book.author}</br>${this.book.rating}</div>`;
+    return html`<div style='border: 1px solid'>
+      ${this.book.title}</br> ${htmlButton} ${this.expanded ? htmlDetail : ""}
+    </div>`;
+  }
+
+  // TODO move into a component
+  htmlButton() {
+    return html` <button
+      id="mybutton"
+      @click="${() => {
+        this.expanded = !this.expanded;
+        console.log(this.expanded);
+      }}"
+    >
+      ${this.expanded ? html`&#x25b2` : html`&#x25bc`}
+    </button>`;
   }
 }
 

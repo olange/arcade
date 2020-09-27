@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { openWcLogo } from "./open-wc-logo.js";
 
 import { ArcadeBooks } from "./arcade-books.js";
+import { ArcadeJson } from "./arcade-json.js";
 
 console.info("ARCADE› Instantiating Apollo Client…");
 const client = new ApolloClient({
@@ -106,7 +107,7 @@ export class ArcadeApp extends LitElement {
     console.log(`ArcadeApp.render: this.books=`, this.books);
     const htmlBooks = html`<div>
       ONE
-      <pre>${JSON.stringify(this.books, null, 2)}</pre>
+      <arcade-json .books=${this.books}></arcade-json>
       TWO
       <arcade-books .books=${this.books}></arcade-books>
     </div> `;
