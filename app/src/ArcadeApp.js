@@ -1,7 +1,7 @@
 import { LitElement, html, css } from "lit-element";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { openWcLogo } from "./open-wc-logo.js";
-
+import { ToggleButton } from "./toggle-button.js"
 import { ArcadeBooks } from "./arcade-books.js";
 import { ArcadeJson } from "./arcade-json.js";
 
@@ -118,6 +118,8 @@ export class ArcadeApp extends LitElement {
         <h1>${this.title}</h1>
         ${this.books ? htmlBooks : htmlLoading}
       </main>
+
+      <toggle-button></toggle-button>
 
       <p class="app-footer">
         Made with love at
