@@ -31,5 +31,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/olange/arcade.git"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
