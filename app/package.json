@@ -1,8 +1,11 @@
 {
   "name": "arcade-app",
   "version": "0.1.0",
-  "description": "D-Arcade app following open-wc recommendations",
+  "description": "Distributed Arcade Game App",
   "author": "Olivier Lange",
+  "contributors": [
+    "Rudi Farkas"
+  ],
   "license": "Apache-2.0",
   "scripts": {
     "postinstall": "npm dedupe",

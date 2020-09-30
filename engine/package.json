@@ -1,23 +1,20 @@
 {
   "name": "arcade-engine",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Distributed Arcade Game Engine",
+  "author": "Olivier Lange",
+  "contributors": [
+    "Rudi Farkas"
+  ],
+  "license": "Apache-2.0",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm dedupe",
     "start": "node index.js",
-    "test":  "echo \"Error: no test specified\" && exit 1",
     "docker:build": "DOCKER_BUILDKIT=1 docker build --tag olange/arcade-engine .",
     "docker:start": "docker run --detach --name arcade-engine --publish 4000:4000 olange/arcade-engine",
-    "docker:stop":  "docker rm -f $(docker ps -a --filter 'name=arcade-engine' -q)"
+    "docker:remove": "docker rm -f $(docker ps -a --filter 'name=arcade-engine' -q)"
   },
-  "keywords": [
-    "arcade",
-    "game",
-    "distributed",
-    "graph"
-  ],
-  "author": "Olivier Lange",
-  "license": "Apache-2.0",
   "dependencies": {
     "apollo-server": "^2.17.0",
     "graphql": "^15.3.0"

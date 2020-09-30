@@ -1,0 +1,35 @@
+{
+  "name": "arcade",
+  "version": "0.1.0",
+  "description": "A distributed arcade game.",
+  "author": "Olivier Lange",
+  "contributors": [
+    "Rudi Farkas"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "postinstall": "run-s install:*",
+    "install:engine": "cd engine && npm install",
+    "install:app": "cd app && npm install",
+    "start": "run-p start:*",
+    "start:engine": "cd engine && npm run start",
+    "start:app": "cd app && npm run watch"
+  },
+  "keywords": [
+    "arcade",
+    "distributed",
+    "game",
+    "graph"
+  ],
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
+  "bugs": {
+    "url": "https://github.com/olange/arcade/issues"
+  },
+  "homepage": "https://github.com/olange/arcade#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olange/arcade.git"
+  }
+}
