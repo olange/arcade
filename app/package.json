@@ -12,7 +12,6 @@
     "build": "run-s build:*",
     "build:clean": "rimraf dist",
     "build:rollup": "rollup -c rollup.config.js",
-    "start": "es-dev-server --app-index index.html --node-resolve --open --watch",
     "watch": "run-p watch:*",
     "watch:rollup": "rollup -w -c rollup.config.js",
     "watch:start": "es-dev-server --root-dir dist --app-index index.html --open --compatibility none"
