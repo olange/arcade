@@ -1,6 +1,4 @@
-import { throwServerError } from "@apollo/client";
 import { LitElement, html } from "lit-element";
-import { ToggleButton } from "./toggle-button.js";
 
 export class ArcadeBooks extends LitElement {
   static get properties() {
@@ -21,7 +19,7 @@ export class ArcadeBooks extends LitElement {
     const htmlButton = html`
       <toggle-button @toggle-click="${(e) => {
         this.expanded = e.detail;
-      }}"/></toggle-button> 
+      }}"/></toggle-button>
     `;
 
     const htmlBooks = html`
@@ -55,7 +53,7 @@ class ArcadeBook extends LitElement {
     const htmlButton = html`
       <toggle-button @toggle-click="${(e) => {
         this.expanded = e.detail;
-      }}"/></toggle-button> 
+      }}"/></toggle-button>
     `;
 
     const htmlDetail = html`<div>${this.book.author}</br>${this.book.rating}</div>`;

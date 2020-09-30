@@ -1,5 +1,3 @@
-import { ArcadeBooks } from "./ArcadeBooks.js";
+import { ArcadeBooks } from './ArcadeBooks.js';
 
-export { ArcadeBooks };
-
-customElements.define("arcade-books", ArcadeBooks);
+customElements.define( 'arcade-books', ArcadeBooks);

@@ -1,11 +1,8 @@
 import { LitElement, html, css } from "lit-element";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { openWcLogo } from "./open-wc-logo.js";
-import { ToggleButton } from "./toggle-button.js";
-import { ArcadeBooks } from "./arcade-books.js";
-import { ArcadeJson } from "./arcade-json.js";
 
-console.info("ARCADE› Instantiating Apollo Client…");
+console.info( "ARCADE› Instantiating Apollo Client…");
 const client = new ApolloClient({
   uri: "http://localhost:4000",
   cache: new InMemoryCache(),
@@ -46,9 +43,9 @@ export class ArcadeApp extends LitElement {
   }
 
   fetchBooks() {
-    console.log("fetchBooks: Looking up available books…");
+    console.log( "fetchBooks: Looking up available books…");
     client.query({ query: BOOKS_QUERY }).then((result) => {
-      console.log("client.query: result.data.books:", result.data.books);
+      console.log( "client.query: result.data.books:", result.data.books);
       this.books = result.data.books;
     });
   }
@@ -112,7 +109,7 @@ export class ArcadeApp extends LitElement {
     const htmlButton = html`<p>
       <toggle-button @toggle-click="${(e) => {
         this.isOpen = e.detail;
-      }}"/></toggle-button> 
+      }}"/></toggle-button>
     </p>`;
 
     const htmlBooks = html`<div>

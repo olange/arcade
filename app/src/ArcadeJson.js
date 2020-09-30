@@ -1,6 +1,4 @@
-import { throwServerError } from "@apollo/client";
 import { LitElement, html, css } from "lit-element";
-import { ToggleButton } from "./toggle-button.js";
 
 export class ArcadeJson extends LitElement {
   static get styles() {
@@ -34,12 +32,12 @@ export class ArcadeJson extends LitElement {
     const htmlButton = html`
       <toggle-button @toggle-click="${(e) => {
         this.expanded = e.detail;
-      }}"/></toggle-button> 
+      }}"/></toggle-button>
     `;
     const htmlJson = html` <pre>${JSON.stringify(this.books, null, 2)}</pre> `;
 
     return html`
-      ArcadeJson:
+      Data:
       <div style="background-color: beige">
         ${htmlButton} ${this.expanded ? htmlJson : ""}
       </div>
