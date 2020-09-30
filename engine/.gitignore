@@ -2,8 +2,5 @@
 node_modules/
 
 # Logs
+*.log
 npm-debug.log*
-
-# System generated files
-.DS_Store
-Thumbs.db

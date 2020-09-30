@@ -1,22 +1,9 @@
-## editors
-/.idea
-/.vscode
+# Dependency directories
+node_modules/
 
-# System generated files
-.DS_Store
-Thumbs.db
+# Build
+dist/
 
-## npm
-/node_modules/
-/npm-debug.log
-
-## testing
-/coverage/
-
-## temp folders
-/.tmp/
-
-# build
-/_site/
-/dist/
-/out-tsc/
+# Logs
+*.log
+npm-debug.log*
