@@ -1,5 +1,6 @@
 import { throwServerError } from "@apollo/client";
 import { LitElement, html, css } from "lit-element";
+import { ToggleButton } from "./toggle-button.js";
 
 export class ArcadeJson extends LitElement {
   static get styles() {
@@ -30,7 +31,11 @@ export class ArcadeJson extends LitElement {
   render() {
     console.log(`ArcadeJson.render: ${this.books.length}`);
 
-    const htmlButton = this.htmlButton();
+    const htmlButton = html`
+      <toggle-button @toggle-click="${(e) => {
+        this.expanded = e.detail;
+      }}"/></toggle-button> 
+    `;
     const htmlJson = html` <pre>${JSON.stringify(this.books, null, 2)}</pre> `;
 
     return html`
@@ -39,18 +44,5 @@ export class ArcadeJson extends LitElement {
         ${htmlButton} ${this.expanded ? htmlJson : ""}
       </div>
     `;
-  }
-
-  // TODO move into a component
-  htmlButton() {
-    return html` <button
-      id="mybutton"
-      @click="${() => {
-        this.expanded = !this.expanded;
-        console.log(this.expanded);
-      }}"
-    >
-      ${this.expanded ? html`&#x25b2` : html`&#x25bc`}
-    </button>`;
   }
 }

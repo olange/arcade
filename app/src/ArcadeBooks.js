@@ -1,5 +1,6 @@
 import { throwServerError } from "@apollo/client";
 import { LitElement, html } from "lit-element";
+import { ToggleButton } from "./toggle-button.js";
 
 export class ArcadeBooks extends LitElement {
   static get properties() {
@@ -17,7 +18,12 @@ export class ArcadeBooks extends LitElement {
 
   render() {
     console.log(`ArcadeBooks.render: ${this.books.length}`);
-    const htmlButton = this.htmlButton();
+    const htmlButton = html`
+      <toggle-button @toggle-click="${(e) => {
+        this.expanded = e.detail;
+      }}"/></toggle-button> 
+    `;
+
     const htmlBooks = html`
       ${this.books.map(
         (book) => html`<arcade-book .book=${book}></arcade-book>`
@@ -30,19 +36,6 @@ export class ArcadeBooks extends LitElement {
         ${htmlButton} ${this.expanded ? htmlBooks : ""}
       </div>
     `;
-  }
-
-  // TODO move into a component
-  htmlButton() {
-    return html` <button
-      id="mybutton"
-      @click="${() => {
-        this.expanded = !this.expanded;
-        console.log(this.expanded);
-      }}"
-    >
-      ${this.expanded ? html`&#x25b2` : html`&#x25bc`}
-    </button>`;
   }
 }
 
@@ -59,24 +52,17 @@ class ArcadeBook extends LitElement {
   }
 
   render() {
-    const htmlButton = this.htmlButton();
+    const htmlButton = html`
+      <toggle-button @toggle-click="${(e) => {
+        this.expanded = e.detail;
+      }}"/></toggle-button> 
+    `;
+
     const htmlDetail = html`<div>${this.book.author}</br>${this.book.rating}</div>`;
+
     return html`<div style='border: 1px solid'>
       ${this.book.title}</br> ${htmlButton} ${this.expanded ? htmlDetail : ""}
     </div>`;
-  }
-
-  // TODO move into a component
-  htmlButton() {
-    return html` <button
-      id="mybutton"
-      @click="${() => {
-        this.expanded = !this.expanded;
-        console.log(this.expanded);
-      }}"
-    >
-      ${this.expanded ? html`&#x25b2` : html`&#x25bc`}
-    </button>`;
   }
 }
 

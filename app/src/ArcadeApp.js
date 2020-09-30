@@ -1,7 +1,7 @@
 import { LitElement, html, css } from "lit-element";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { openWcLogo } from "./open-wc-logo.js";
-import { ToggleButton } from "./toggle-button.js"
+import { ToggleButton } from "./toggle-button.js";
 import { ArcadeBooks } from "./arcade-books.js";
 import { ArcadeJson } from "./arcade-json.js";
 
@@ -26,6 +26,7 @@ export class ArcadeApp extends LitElement {
     return {
       title: { type: String },
       books: { type: Array },
+      isOpen: { type: Boolean },
     };
   }
 
@@ -33,6 +34,7 @@ export class ArcadeApp extends LitElement {
     super();
     this.title = "D-Arcade";
     this.books = undefined;
+    this.isOpen = false;
   }
 
   connectedCallback() {
@@ -105,21 +107,30 @@ export class ArcadeApp extends LitElement {
 
   render() {
     console.log(`ArcadeApp.render: this.books=`, this.books);
+    const htmlLoading = html`<p>Loading… possibly a network error</p>`;
+
+    const htmlButton = html`<p>
+      <toggle-button @toggle-click="${(e) => {
+        this.isOpen = e.detail;
+      }}"/></toggle-button> 
+    </p>`;
+
     const htmlBooks = html`<div>
-      ONE
       <arcade-json .books=${this.books}></arcade-json>
-      TWO
       <arcade-books .books=${this.books}></arcade-books>
     </div> `;
-    const htmlLoading = html`<p>Loading… possibly a network error</p>`;
+
+    const htmlButtonAndBooks = html`<div>
+      ${htmlButton}
+      ${this.isOpen ? htmlBooks : "Closed"} </br>
+    </div>`;
+
     return html`
       <main>
         <div class="logo">${openWcLogo}</div>
         <h1>${this.title}</h1>
-        ${this.books ? htmlBooks : htmlLoading}
+        ${!this.books ? htmlLoading : htmlButtonAndBooks}
       </main>
-
-      <toggle-button></toggle-button>
 
       <p class="app-footer">
         Made with love at
