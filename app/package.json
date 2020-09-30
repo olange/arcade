@@ -5,10 +5,14 @@
   "author": "Olivier Lange",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "rimraf dist && rollup -c rollup.config.js",
-    "start:build": "npm run build && es-dev-server --root-dir dist --app-index index.html --open --compatibility none",
+    "postinstall": "npm dedupe",
+    "build": "run-s build:*",
+    "build:clean": "rimraf dist",
+    "build:rollup": "rollup -c rollup.config.js",
     "start": "es-dev-server --app-index index.html --node-resolve --open --watch",
-    "bdsm": "nodemon --watch src --exec 'npm run start:build' --verbose"
+    "watch": "run-p watch:*",
+    "watch:rollup": "rollup -w -c rollup.config.js",
+    "watch:start": "es-dev-server --root-dir dist --app-index index.html --open --compatibility none"
   },
   "dependencies": {
     "@apollo/client": "^3.2.1",
@@ -22,6 +26,7 @@
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "es-dev-server": "^1.5.0",
+    "npm-run-all": "^4.1.5",
     "rimraf": "^2.7.1",
     "rollup": "^2.3.4"
   }
