@@ -4,10 +4,10 @@ export class DBoard extends LitElement {
 
   static get properties() {
     return {
-      rows: { type: Number },
-      cols: { type: Number },
+      layout: { type: String },
     };
   }
+
   static get styles() {
     return css`
       g.grid { fill: white; stroke: black; }
@@ -19,19 +19,29 @@ export class DBoard extends LitElement {
 
   constructor() {
     super();
-    this.rows = 5;
-    this.cols = 5;
+    this.layout = "pacman-L01";
+    this.cells = [ 'xxxxxxxxxxxxxxx',
+                   'xx·x●x····xx··x',
+                   'x··x·P··x●x·xxx',
+                   'xxMxxxx·xxx··xx',
+                   'xx·x●x····xx··x',
+                   'xx●···Fx··D···x',
+                   'xxxxxxxxxxxxxxx' ];
+    this.rows = this.cells.length;
+    this.cols = Math.max( ...this.cells.map( line => line.length));
   }
 
   boardCell( coord) {
     const { row, col } = coord;
     const isOddRow = Math.abs( row % 2) == 1;
     const isOddCol = Math.abs( col % 2) == 1;
+    const cellCode = this.cells[ row][ col] || "·";
     return svg`<g class="cell ${isOddRow ? 'odd' : 'even'}"
                   transform="translate( ${col*150}, ${isOddCol ? 87 : 0})">
       <polygon points="100,0 50,-87 -50,-87 -100,-0 -50,87 50,87"></polygon>
-      <text dx="-0.7em" dy="0.4em"><tspan class="q-coord">${row}</tspan>, <tspan class="r-coord">${col}</tspan></text>
+      <text dx="-0.7em" dy="0.4em">${cellCode}</text>
     </g>`;
+    // <tspan class="q-coord">${row}</tspan>, <tspan class="r-coord">${col}</tspan>
   }
 
   boardRow( row, nbCols) {

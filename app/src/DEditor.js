@@ -14,7 +14,7 @@ export class DEditor extends LitElement {
     return html`
       <main>
         <h1>D-Arcade</h1>
-        <d-board rows="5" cols="8"></d-board>
+        <d-board></d-board>
       </main>
     `;
   }
