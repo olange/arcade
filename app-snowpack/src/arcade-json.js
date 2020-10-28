@@ -2,6 +2,7 @@ import { customElement, property, LitElement, html, css } from "lit-element";
 
 @customElement('arcade-json')
 export class ArcadeJson extends LitElement {
+
   static get styles() {
     return css`
       pre {
@@ -14,32 +15,27 @@ export class ArcadeJson extends LitElement {
     `;
   }
 
-  static get properties() {
-    return {
-      books: { type: Array },
-      expanded: { type: Boolean },
-    };
-  }
+  @property({ type: Array })
+  books = [];
+
+  @property({ type: Boolean })
+  expanded = false;
 
   constructor() {
     super();
-    this.books = [];
-    this.expanded = false;
   }
 
   render() {
-    console.log(`ArcadeJson.render: ${this.books.length}`);
-
     const htmlButton = html`
       <toggle-button @toggle-click="${(e) => {
         this.expanded = e.detail;
       }}"/></toggle-button>
     `;
-    const htmlJson = html` <pre>${JSON.stringify(this.books, null, 2)}</pre> `;
+    const htmlJson = html`<pre>${JSON.stringify(this.books, null, 2)}</pre> `;
 
     return html`
       Data:
-      <div style="background-color: beige">
+      <div>
         ${htmlButton} ${this.expanded ? htmlJson : ""}
       </div>
     `;

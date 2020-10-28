@@ -48,9 +48,9 @@ export class ArcadeApp extends LitElement {
   }
 
   fetchBooks() {
-    console.log( "fetchBooks: Looking up available books…");
+    console.log( "ARCADE› fetchBooks() › Looking up available books…");
     client.query({ query: BOOKS_QUERY }).then((result) => {
-      console.log( "client.query: result.data.books:", result.data.books);
+      console.log( "ARCADE› fetchBooks() › Books fetched:", result.data.books);
       this.books = result.data.books;
     });
   }
@@ -108,7 +108,6 @@ export class ArcadeApp extends LitElement {
   }
 
   render() {
-    console.log(`ArcadeApp.render: this.books=`, this.books);
     const htmlLoading = html`<p>Loading… possibly a network error</p>`;
 
     const htmlButton = html`<p>
@@ -139,7 +138,7 @@ export class ArcadeApp extends LitElement {
         <a target="_blank" rel="noopener noreferrer" href="https://gongfu.io"
           >Gōng-fu I/O</a
         > </br>
-        Built with 
+        Built with
         <a target="_blank" rel="noopener noreferrer" href="https://www.snowpack.dev/"
         >Snowpack</a
       >

@@ -3,9 +3,7 @@
 ### Apollo client app matching the Apollo Server [arcade-app](https://github.com/olange/arcade)
 
 > ✨ Work in Progress
-
 > ✨ Bootstrapped with Create Snowpack App (CSA).
-
 > ✨ [Get Started](https://www.snowpack.dev/#get-started)
 
 ```

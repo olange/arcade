@@ -49,7 +49,6 @@ export class ToggleButton extends LitElement {
             id="mybutton"
             @click="${() => {
               this.activated = !this.activated;
-              console.log("ToggleButton", this.activated);
             }}">
             ${this.activated ? html`&#x25b2` : html`&#x25bc`}
           </button></br>

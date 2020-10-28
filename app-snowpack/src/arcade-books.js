@@ -2,21 +2,18 @@ import { customElement, property, LitElement, html, css } from "lit-element";
 
 @customElement('arcade-books')
 export class ArcadeBooks extends LitElement {
-  static get properties() {
-    return {
-      books: { type: Array },
-      expanded: { type: Boolean },
-    };
-  }
+
+  @property({ type: Array })
+  books = [];
+
+  @property({ type: Boolean })
+  expanded = false;
 
   constructor() {
     super();
-    this.books = [];
-    this.expanded = false;
   }
 
   render() {
-    console.log(`ArcadeBooks.render: ${this.books.length}`);
     const htmlButton = html`
       <toggle-button @toggle-click="${(e) => {
         this.expanded = e.detail;
@@ -31,7 +28,7 @@ export class ArcadeBooks extends LitElement {
 
     return html`
       ArcadeBooks:
-      <div style="background-color: beige">
+      <div>
         ${htmlButton} ${this.expanded ? htmlBooks : ""}
       </div>
     `;
@@ -40,15 +37,24 @@ export class ArcadeBooks extends LitElement {
 
 @customElement('arcade-book')
 class ArcadeBook extends LitElement {
-  static get properties() {
-    return {
-      book: { type: Object },
-      expanded: { type: Boolean },
-    };
+
+  static get styles() {
+    return css`
+      .book {
+        background-color: white;
+        border: 1px solid lightgray;
+      }
+    `;
   }
+
+  @property({ type: Object })
+  book = undefined;
+
+  @property({ type: Boolean })
+  expanded = false;
+
   constructor() {
     super();
-    this.expanded = false;
   }
 
   render() {
@@ -60,7 +66,7 @@ class ArcadeBook extends LitElement {
 
     const htmlDetail = html`<div>${this.book.author}</br>${this.book.rating}</div>`;
 
-    return html`<div style='border: 1px solid'>
+    return html`<div class="book">
       ${this.book.title}</br> ${htmlButton} ${this.expanded ? htmlDetail : ""}
     </div>`;
   }
