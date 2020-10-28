@@ -1,14 +1,14 @@
-import { customElement, property, LitElement, html, css } from "lit-element";
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import { openWcLogo } from "./open-wc-logo.js";
+import { customElement, property, LitElement, html, css } from 'lit-element';
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { openWcLogo } from './open-wc-logo.js';
 
 import { ToggleButton } from './toggle-button';
 import { ArcadeJson } from './arcade-json';
 import { ArcadeBooks } from './arcade-books';
 
-console.info( "ARCADE› Instantiating Apollo Client…");
+console.info('ARCADE› Instantiating Apollo Client…');
 const client = new ApolloClient({
-  uri: "http://localhost:4000",
+  uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
 });
 
@@ -34,7 +34,7 @@ export class ArcadeApp extends LitElement {
 
   constructor() {
     super();
-    this.title = "D-Arcade";
+    this.title = 'D-Arcade';
     this.books = undefined;
     this.isOpen = false;
   }
@@ -42,15 +42,15 @@ export class ArcadeApp extends LitElement {
   connectedCallback() {
     super.connectedCallback();
 
-    if (typeof this.books === "undefined") {
+    if (typeof this.books === 'undefined') {
       this.fetchBooks();
     }
   }
 
   fetchBooks() {
-    console.log( "ARCADE› fetchBooks() › Looking up available books…");
+    console.log('ARCADE› fetchBooks() › Looking up available books…');
     client.query({ query: BOOKS_QUERY }).then((result) => {
-      console.log( "ARCADE› fetchBooks() › Books fetched:", result.data.books);
+      console.log('ARCADE› fetchBooks() › Books fetched:', result.data.books);
       this.books = result.data.books;
     });
   }
@@ -123,7 +123,7 @@ export class ArcadeApp extends LitElement {
 
     const htmlButtonAndBooks = html`<div>
       ${htmlButton}
-      ${this.isOpen ? htmlBooks : "Closed"} </br>
+      ${this.isOpen ? htmlBooks : 'Closed'} </br>
     </div>`;
 
     return html`

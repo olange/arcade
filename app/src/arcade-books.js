@@ -1,8 +1,7 @@
-import { customElement, property, LitElement, html, css } from "lit-element";
+import { customElement, property, LitElement, html, css } from 'lit-element';
 
 @customElement('arcade-books')
 export class ArcadeBooks extends LitElement {
-
   @property({ type: Array })
   books = [];
 
@@ -22,22 +21,19 @@ export class ArcadeBooks extends LitElement {
 
     const htmlBooks = html`
       ${this.books.map(
-        (book) => html`<arcade-book .book=${book}></arcade-book>`
+        (book) => html`<arcade-book .book=${book}></arcade-book>`,
       )}
     `;
 
     return html`
       ArcadeBooks:
-      <div>
-        ${htmlButton} ${this.expanded ? htmlBooks : ""}
-      </div>
+      <div>${htmlButton} ${this.expanded ? htmlBooks : ''}</div>
     `;
   }
 }
 
 @customElement('arcade-book')
 class ArcadeBook extends LitElement {
-
   static get styles() {
     return css`
       .book {
@@ -67,8 +63,7 @@ class ArcadeBook extends LitElement {
     const htmlDetail = html`<div>${this.book.author}</br>${this.book.rating}</div>`;
 
     return html`<div class="book">
-      ${this.book.title}</br> ${htmlButton} ${this.expanded ? htmlDetail : ""}
+      ${this.book.title}</br> ${htmlButton} ${this.expanded ? htmlDetail : ''}
     </div>`;
   }
 }
-

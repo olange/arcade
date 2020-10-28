@@ -1,7 +1,7 @@
 // ToggleButton web component
 // Copyright © 2020 Rudolf Farkas @rudifa
 
-import { customElement, property, LitElement, html, css } from "lit-element";
+import { customElement, property, LitElement, html, css } from 'lit-element';
 
 /**
  * example of use in a parent web component
@@ -29,9 +29,9 @@ export class ToggleButton extends LitElement {
 
   attributeChangedCallback(name, oldval, newval) {
     super.attributeChangedCallback(name, oldval, newval);
-    if (name === "activated")
+    if (name === 'activated')
       this.dispatchEvent(
-        new CustomEvent("toggle-click", { detail: this.activated })
+        new CustomEvent('toggle-click', { detail: this.activated }),
       );
   }
 

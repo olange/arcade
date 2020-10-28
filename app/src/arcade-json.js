@@ -1,8 +1,7 @@
-import { customElement, property, LitElement, html, css } from "lit-element";
+import { customElement, property, LitElement, html, css } from 'lit-element';
 
 @customElement('arcade-json')
 export class ArcadeJson extends LitElement {
-
   static get styles() {
     return css`
       pre {
@@ -35,9 +34,7 @@ export class ArcadeJson extends LitElement {
 
     return html`
       Data:
-      <div>
-        ${htmlButton} ${this.expanded ? htmlJson : ""}
-      </div>
+      <div>${htmlButton} ${this.expanded ? htmlJson : ''}</div>
     `;
   }
 }
