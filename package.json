@@ -13,7 +13,8 @@
     "install:app": "cd app && npm install",
     "start": "run-p start:*",
     "start:engine": "cd engine && npm run start",
-    "start:app": "cd app && npm run watch"
+    "start:app": "cd app && npm run watch",
+    "start:app-snowpack": "cd app-snowpack && npm start"
   },
   "keywords": [
     "arcade",
