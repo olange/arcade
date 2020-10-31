@@ -4,18 +4,8 @@ import { bookshelf } from './assets/bookshelf.js';
 import { mobilegame } from './assets/mobilegame.js';
 import { burgericon } from './assets/burgericon.js';
 
-let defaultIcon = html`<svg
-  viewBox="0 0 500 500"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <circle
-    cx="250"
-    cy="250"
-    r="200"
-    fill-opacity="0"
-    stroke="black"
-    stroke-width="25"
-  />
+let defaultIcon = html`<svg viewBox="0 0 500 500">
+  <circle cx="250" cy="250" r="180" fill-opacity="0" stroke-width="35" />
 </svg>`;
 
 @customElement('button-svg')
@@ -38,9 +28,6 @@ export class ButtonSvg extends LitElement {
       .wrapper {
         display: block;
         flex-direction: row;
-        /*
-        background-color: #2196f3;
-        */
     `;
   }
 

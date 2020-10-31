@@ -17,10 +17,10 @@ export class ArcadeDashboard extends LitElement {
 
         display: flex;
         flex-direction: row;
-
         justify-content: flex-start;
+
         font-size: calc(10px + 2vmin);
-        color: #1a2b42;
+        color: #333333; /* text color */
         /*max-width: 960px;*/
         margin: 0 auto;
         text-align: center;
@@ -42,29 +42,19 @@ export class ArcadeDashboard extends LitElement {
         background-color: #c0c0c0;
         overflow-x: hidden;
         padding-top: 16px;
-        justify-content: flex-start; /* primary = column / vert*/
-        align-items: center; /* secondary = row / hor */
+        justify-content: flex-start; /* primary = column ~ vert*/
+        align-items: center; /* secondary = row ~ hor */
       }
 
       .menu-btn {
         text-decoration: none;
         font-size: 20px;
-        color: #818181;
-        background-color: transparent; /*!important for debugging */
-        display: block; /* needed, to preserve highlighting on hover - why?*/
+        stroke: black;
         width: 65px;
       }
 
-      .sidebar a:hover {
-        color: #f1f1f1;
-      }
-
       .menu-btn:hover {
-        background-color: #f1f1f1 !important;
-      }
-
-      button-svg svg:hover {
-        background-color: #f1f1f1;
+        stroke: #bbffbb;
       }
 
       .main {
@@ -72,8 +62,8 @@ export class ArcadeDashboard extends LitElement {
         flex: 1;
         flex-direction: column; /* OK, this sends footnote to below the apps */
 
-        justify-content: flex-start; /* primary = column / vert */
-        align-items: center; /* secondary = row / hor */
+        justify-content: flex-start; /* primary = column ~ vert */
+        align-items: center; /* secondary = row ~ hor */
 
         font-size: 16px;
         margin-left: 100px; /* Same as the width of the sidebar */
@@ -87,10 +77,6 @@ export class ArcadeDashboard extends LitElement {
       h2 {
         font-size: 1.5rem;
         color: red;
-      }
-
-      main_x {
-        flex-grow: 1;
       }
 
       .logo > svg {
@@ -124,25 +110,6 @@ export class ArcadeDashboard extends LitElement {
         margin-left: 5px;
       }
     `;
-
-    /*
-.flex-container { # host
-    display: flex;
- }
- .flex-column { # main
-    flex: 1;
-    background-color: blue;
- }
- 
- .fixed-column { # sidebar
-   width: 200px;
-   background-color: red
- }
- <div class="flex-container">
-   <div class="fixed-column"> Small </div>
-   <div class="flex-column"> Big </div>
-</div>
-*/
   }
 
   constructor() {
