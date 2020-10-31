@@ -8,8 +8,6 @@ import { openWcLogo } from './open-wc-logo.js';
 
 @customElement('arcade-dashboard')
 export class ArcadeDashboard extends LitElement {
-  @property() message = '';
-
   static get styles() {
     return css`
       :host {
@@ -112,29 +110,14 @@ export class ArcadeDashboard extends LitElement {
     `;
   }
 
+  @property({ type: String })
+  title = 'D-Arcade';
+
+  @property({ type: String })
+  selectedVariant = 'mobilegame';
+
   constructor() {
     super();
-    this.title = 'D-Arcade';
-    this.selectedVariant = 'mobilegame';
-  }
-
-  static get properties() {
-    return {
-      title: { type: String },
-      selectedVariant: { type: String },
-    };
-  }
-
-  set selectedVariant(val) {
-    let oldVal = this._appVariant;
-    this._appVariant = val;
-    console.log('selectedVariant', oldVal, val);
-
-    this.requestUpdate('selectedVariant', oldVal);
-  }
-
-  get selectedVariant() {
-    return this._appVariant;
   }
 
   handleButtonHit(e) {

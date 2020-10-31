@@ -10,14 +10,8 @@ let defaultIcon = html`<svg viewBox="0 0 500 500">
 
 @customElement('button-svg')
 export class ButtonSvg extends LitElement {
-  static get properties() {
-    return { icon: { type: String } };
-  }
-
-  constructor() {
-    super();
-    this.icon = 'unknown';
-  }
+  @property({ type: String })
+  icon = 'unknown';
 
   static get styles() {
     return css`

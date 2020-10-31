@@ -1,12 +1,9 @@
-import { LitElement, customElement, svg, css } from 'lit-element';
+import { LitElement, customElement, svg, css, property } from 'lit-element';
 
 @customElement('d-board')
 export class DBoard extends LitElement {
-  static get properties() {
-    return {
-      layout: { type: String },
-    };
-  }
+  @property({ type: String })
+  layout = 'pacman-L01';
 
   static get styles() {
     return css`
@@ -33,7 +30,6 @@ export class DBoard extends LitElement {
 
   constructor() {
     super();
-    this.layout = 'pacman-L01';
     this.cells = [
       'xxxxxxxxxxxxxxx',
       'xx·x●x····xx··x',

@@ -24,20 +24,14 @@ const BOOKS_QUERY = gql`
 
 @customElement('arcade-app')
 export class ArcadeApp extends LitElement {
-  static get properties() {
-    return {
-      title: { type: String },
-      books: { type: Array },
-      isOpen: { type: Boolean },
-    };
-  }
+  @property({ type: Boolean })
+  isOpen = false;
 
-  constructor() {
-    super();
-    this.title = 'D-Arcade';
-    this.books = undefined;
-    this.isOpen = false;
-  }
+  @property({ type: String })
+  title = 'D-Arcade';
+
+  @property({ type: Array })
+  books = undefined;
 
   connectedCallback() {
     super.connectedCallback();
@@ -50,7 +44,10 @@ export class ArcadeApp extends LitElement {
   fetchBooks() {
     console.log('ArcadeApp› fetchBooks() › Looking up available books…');
     client.query({ query: BOOKS_QUERY }).then((result) => {
-      console.log('ArcadeApp› fetchBooks() › Books fetched:', result.data.books);
+      console.log(
+        'ArcadeApp› fetchBooks() › Books fetched:',
+        result.data.books,
+      );
       this.books = result.data.books;
     });
   }

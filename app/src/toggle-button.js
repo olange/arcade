@@ -10,22 +10,14 @@ import { customElement, property, LitElement, html, css } from 'lit-element';
 
 @customElement('toggle-button')
 export class ToggleButton extends LitElement {
-  constructor() {
-    super();
-    this.activated = false;
-    this.activeSymbol = "▲";
-    this.inactiveSymbol = "▼";
-  }
-  static get properties() {
-    return {
-      activeSymbol: { type: String },
-      inactiveSymbol: { type: String },
-      activated: {
-        type: Boolean,
-        reflect: true,
-      },
-    };
-  }
+  @property({ type: Boolean, reflect: true })
+  activated = false;
+
+  @property({ type: String })
+  activeSymbol = '▲';
+
+  @property({ type: String })
+  inactiveSymbol = '▼';
 
   attributeChangedCallback(name, oldval, newval) {
     super.attributeChangedCallback(name, oldval, newval);
@@ -50,7 +42,11 @@ export class ToggleButton extends LitElement {
             @click="${() => {
               this.activated = !this.activated;
             }}">
-            ${this.activated ? html`${this.activeSymbol}` : html`${this.inactiveSymbol}`}
+            ${
+              this.activated
+                ? html`${this.activeSymbol}`
+                : html`${this.inactiveSymbol}`
+            }
           </button></br>
         </div>
       `;
