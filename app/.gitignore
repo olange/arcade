@@ -1,6 +1,4 @@
-# Dependency directories
-node_modules/
-
-# Logs
-*.log
-npm-debug.log*
+.build
+build
+web_modules
+node_modules

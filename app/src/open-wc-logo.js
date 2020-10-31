@@ -2,8 +2,8 @@ import { html } from 'lit-html';
 
 export const openWcLogo = html`
   <svg
-    width="244px"
-    height="244px"
+    width="50px"
+    height="50px"
     viewBox="0 0 244 244"
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"

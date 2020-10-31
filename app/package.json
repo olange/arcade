@@ -1,14 +1,5 @@
 {
-  "name": "arcade-app",
-  "version": "0.1.0",
-  "description": "Distributed Arcade Game App",
-  "author": "Olivier Lange",
-  "contributors": [
-    "Rudi Farkas"
-  ],
-  "license": "Apache-2.0",
   "scripts": {
-    "postinstall": "npm dedupe",
     "start": "snowpack dev",
     "build": "snowpack build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1",
@@ -29,8 +20,5 @@
     "@snowpack/plugin-dotenv": "^2.0.3",
     "prettier": "^2.0.5",
     "snowpack": "^2.13.2"
-  },
-  "engines": {
-    "node": "14.x"
   }
 }

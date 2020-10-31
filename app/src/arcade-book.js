@@ -47,6 +47,8 @@ export class ArcadeBook extends LitElement {
   }
 
   render() {
+    console.log('ArcadeBook.render', this.book);
+
     const htmlButton = html`
       <toggle-button @toggle-click="${(e) => {
         this.expanded = e.detail;
