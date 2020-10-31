@@ -137,7 +137,7 @@ export class ArcadeDashboard extends LitElement {
   }
 
   buttonStyle(iconName) {
-      return iconName == this.selectedVariant ? `stroke: green` : ``;
+    return iconName == this.selectedVariant ? `stroke: green` : ``;
   }
 
   render() {
@@ -146,22 +146,22 @@ export class ArcadeDashboard extends LitElement {
             <div class="logo">
                 ${openWcLogo}
                 <h6>${this.title}</h6>
-            </div>           
-            <button-svg class="menu-btn" icon="bookshelf" style="${this.buttonStyle('bookshelf')}" @button-hit="${
-              this.handleButtonHit
-            }" >Books</button-svg>
-            <button-svg class="menu-btn" icon="mobilegame" style="${this.buttonStyle('mobilegame')}" @button-hit="${
-              this.handleButtonHit
-            }" >Game</button-svg>  
-            <button-svg class="menu-btn" icon="burgericon" style="${this.buttonStyle('burgericon')}" @button-hit="${
-              this.handleButtonHit
-            }" ></button-svg>  
-            <button-svg class="menu-btn" icon="" style="${this.buttonStyle('')}" @button-hit="${
-              this.handleButtonHit
-            }" ></button-svg>  
+            </div>
+            <button-svg class="menu-btn" icon="bookshelf" style="${this.buttonStyle(
+              'bookshelf',
+            )}" @button-hit="${this.handleButtonHit}" ></button-svg>
+            <button-svg class="menu-btn" icon="mobilegame" style="${this.buttonStyle(
+              'mobilegame',
+            )}" @button-hit="${this.handleButtonHit}" ></button-svg>
+            <button-svg class="menu-btn" icon="burgericon" style="${this.buttonStyle(
+              'burgericon',
+            )}" @button-hit="${this.handleButtonHit}" ></button-svg>
+            <button-svg class="menu-btn" icon="" style="${this.buttonStyle(
+              '',
+            )}" @button-hit="${this.handleButtonHit}" ></button-svg>
         </div>
         <div class="main">
-            <main>  
+            <main>
             ${this.selectedAppVariant()}
             </main>
 

@@ -18,7 +18,7 @@ export class ButtonSvg extends LitElement {
       h1 {
         font-size: 4rem;
       }
-     
+
       .wrapper {
         display: block;
         flex-direction: row;
