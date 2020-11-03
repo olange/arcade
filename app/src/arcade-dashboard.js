@@ -124,14 +124,19 @@ export class ArcadeDashboard extends LitElement {
   selectedAppVariant() {
     console.log('selectedAppVariant ', this.selectedVariant);
     switch (this.selectedVariant) {
+      case 'hexaicon':
+        return html`<d-editor></d-editor>`;
       case 'bookshelf':
         return html`<arcade-app></arcade-app>`;
       case 'mobilegame':
-        return html`<d-editor></d-editor>`;
+        return html`
+          <h3>Watch this space</h3>
+          <h3>hacman coming soon</h3>
+        `;
       case 'burgericon':
         return html`
           <h3>Watch this space</h3>
-          <h3>More fun coming soon</h3>
+          <h3>more games coming soon</h3>
         `;
     }
   }
@@ -147,6 +152,9 @@ export class ArcadeDashboard extends LitElement {
                 ${openWcLogo}
                 <h6>${this.title}</h6>
             </div>
+            <button-svg class="menu-btn" icon="hexaicon" style="${this.buttonStyle(
+              'hexaicon',
+            )}" @button-hit="${this.handleButtonHit}" ></button-svg>
             <button-svg class="menu-btn" icon="bookshelf" style="${this.buttonStyle(
               'bookshelf',
             )}" @button-hit="${this.handleButtonHit}" ></button-svg>
@@ -156,9 +164,7 @@ export class ArcadeDashboard extends LitElement {
             <button-svg class="menu-btn" icon="burgericon" style="${this.buttonStyle(
               'burgericon',
             )}" @button-hit="${this.handleButtonHit}" ></button-svg>
-            <button-svg class="menu-btn" icon="" style="${this.buttonStyle(
-              '',
-            )}" @button-hit="${this.handleButtonHit}" ></button-svg>
+
         </div>
         <div class="main">
             <main>
