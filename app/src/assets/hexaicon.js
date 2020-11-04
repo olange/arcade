@@ -1,19 +1,11 @@
 import { html } from 'lit-html';
 
-const burgericon = html`
-  <svg viewBox="0 0 500 500">
-    <g stroke-width="50">
-      <path d="M100 0   m0 125 l300 0 z   m0 125 l300 0 z   m0 125 l300 0 z" />
-    </g>
-  </svg>
-`;
-
 export const hexaicon = html` <svg
   style="background-color: lightgreen"
   viewBox="0 0 500 500"
 >
   <defs>
-    <g id="hexa"  stroke-width="20" fill-opacity="0">
+    <g id="hexa" stroke-width="20" fill-opacity="0">
       <path d="M 75,0 L 37.5,65 -37.5,65 -75,0 -37.5,-65 37.5,-65 Z" />
     </g>
   </defs>
