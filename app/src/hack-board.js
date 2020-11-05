@@ -2,10 +2,12 @@
  * TODO
  *
  * HackBoard:
- * - width, height as properties to use in render()
+ * - width, height properties
  * - renderViewBox(bgcolor, svgtres) uses width, height, used in render()
+ * + shapes: square, circle, pacman
  *
  * - buttons pan, zoom; move (clicked-on svg item), with arrow keys
+ * - mat-button see accordion
  */
 
 import {
@@ -18,7 +20,6 @@ import {
 } from 'lit-element';
 
 import { square, circle0, circle, pacman } from './assets/hack-shapes';
-//import { pacman } from './assets/pacman';
 
 /**
  * utilities ***********************************
