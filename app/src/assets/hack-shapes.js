@@ -6,14 +6,10 @@ import { html, svg } from 'lit-html';
  * @param { NUmber } cy
  * @param { String } r
  */
-export function circle0(cx, cy, r) {
-  return svg`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" style="stroke:green; stroke-width: 2;"/>`;
-}
 export function circle(size, color) {
   let r = size / 2;
   let cx = r;
   let cy = r;
-
   return svg`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}"/>`;
 }
 
@@ -28,6 +24,38 @@ export function square(size, fillColor) {
 
 /**
  *
+ * @param { Number } size
+ */
+export function squareX(size) {
+  return svg`<g>
+    <defs>
+        <clipPath id="clip-shape" clipPathUnits="objectBoundingBox">
+            <polygon points="0 1, 0 0, 1 0, 1 1" />
+        </clipPath>
+    </defs>
+    <g style="clip-path: url(#clip-shape); stroke:dodgerblue; stroke-width:3;" >
+        <rect width="${size}" height="${size}" style="fill:black; "/>
+        <path d="M0,0 L${size},${size} M${size},0 L0,${size} "/>
+    </g>
+        </g>`;
+}
+
+/**
+ *
+ * @param { Number } size
+ * @param { String } text
+ */
+export function squareText(size, text) {
+  return svg`<g>
+        <rect width="${size}" height="${size}" fill="black"
+         />
+        <text fill="white" x="${size/2}" y="${size/2}"
+   text-anchor="middle" alignment-baseline="central" >${text}</text>
+    </g>`;
+}
+
+/**
+ *
  * @param {Number} size
  * @param {Number} yawnDeg
  */
@@ -37,7 +65,7 @@ export function pacman(size, yawnDeg) {
   let c = Math.cos(halfRad);
   let s = Math.sin(halfRad);
   let r = size * 0.4;
-  let ts = size * 0.1
+  let ts = size * 0.1;
   let sx = r * (1 + c);
   let sy = r * (1 - s);
   let edy = 2 * r * s;
