@@ -1,9 +1,11 @@
 import { customElement, property, LitElement, html, css } from 'lit-element';
 
-import { bookshelf } from './assets/bookshelf.js';
-import { mobilegame } from './assets/mobilegame.js';
-import { burgericon } from './assets/burgericon.js';
-import { hexaicon } from './assets/hexaicon.js';
+import {
+  bookshelf,
+  burgericon,
+  hexaicon,
+  mobilegame,
+} from './assets/arcade-icons.js';
 
 let defaultIcon = html`<svg viewBox="0 0 500 500">
   <circle cx="250" cy="250" r="180" fill-opacity="0" stroke-width="35" />
