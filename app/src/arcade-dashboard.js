@@ -2,6 +2,7 @@ import { customElement, property, LitElement, html, css } from 'lit-element';
 
 import { ArcadeApp } from './arcade-app';
 import { DEditor } from './d-editor';
+import { HackEdit } from './hack-edit';
 
 import { ButtonSvg } from './button-svg';
 import { openWcLogo } from './open-wc-logo.js';
@@ -129,10 +130,7 @@ export class ArcadeDashboard extends LitElement {
       case 'bookshelf':
         return html`<arcade-app></arcade-app>`;
       case 'mobilegame':
-        return html`
-          <h3>Watch this space</h3>
-          <h3>hacman coming soon</h3>
-        `;
+        return html`<hack-edit></hack-edit>`;
       case 'burgericon':
         return html`
           <h3>Watch this space</h3>
