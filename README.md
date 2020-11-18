@@ -23,5 +23,5 @@ Alternatively:
 
 ```bash
 cd engine && npm start &
-cd app && npm watch
+cd app && npm start
 ```
