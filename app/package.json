@@ -9,28 +9,26 @@
   "license": "Apache-2.0",
   "scripts": {
     "postinstall": "npm dedupe",
-    "build": "run-s build:*",
-    "build:clean": "rimraf dist",
-    "build:rollup": "rollup -c rollup.config.js",
-    "watch": "run-p watch:*",
-    "watch:rollup": "rollup -w -c rollup.config.js",
-    "watch:start": "es-dev-server --root-dir dist --app-index index.html --open --compatibility none"
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "test": "echo \"This template does not include a test runner by default.\" && exit 1",
+    "format": "prettier --write \"src/**/*.js\"",
+    "lint": "prettier --check \"src/**/*.js\""
   },
   "dependencies": {
-    "@apollo/client": "^3.2.1",
+    "@apollo/client": "^3.2.2",
     "graphql": "^15.3.0",
-    "lit-element": "^2.0.1",
-    "lit-html": "^1.0.0",
+    "lit-element": "^2.3.1",
+    "lit-html": "^1.2.1",
     "react": "^16.13.1"
   },
   "devDependencies": {
-    "@open-wc/building-rollup": "^1.0.0",
-    "@rollup/plugin-commonjs": "^15.1.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
-    "es-dev-server": "^1.5.0",
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^2.7.1",
-    "rollup": "^2.3.4"
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@snowpack/plugin-babel": "^2.1.2",
+    "@snowpack/plugin-dotenv": "^2.0.3",
+    "prettier": "^2.0.5",
+    "snowpack": "^2.13.2"
   },
   "engines": {
     "node": "14.x"
