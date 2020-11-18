@@ -189,26 +189,26 @@ export class HackBoard extends LitElement {
       case 0: {
         // single cell
         let arrarr = HackBoard.splitsplit(this.layout);
-        cl_pretty(arrarr, 'arrarr');
+        // cl_pretty(arrarr, 'arrarr');
         let cellCode = arrarr[3][0];
         let cellShape = this.convert(cellCode);
-        cl_pretty(cellShape, 'cellShape');
+        // cl_pretty(cellShape, 'cellShape');
         return svg`${cellShape}`;
       }
       case 1: {
         // row of cells
         let arrarr = HackBoard.splitsplit(this.layout);
         let cellCodes = arrarr[1];
-        cl_pretty(cellCodes, 'cellCodes');
+        // cl_pretty(cellCodes, 'cellCodes');
         let cellShapes1Dim = this.shapesForCellCodeLine(cellCodes);
-        cl_pretty(cellShapes1Dim, 'cellShapes1Dim');
+        // cl_pretty(cellShapes1Dim, 'cellShapes1Dim');
         return svg`${cellShapes1Dim}`;
       }
       default:
       case 2: {
         // full 2Dim board
         let cellShapes2Dim = this.shapesForCellCodeLines();
-        cl_pretty(cellShapes2Dim, 'cellShapes2Dim');
+        // cl_pretty(cellShapes2Dim, 'cellShapes2Dim');
         return svg`${cellShapes2Dim}`;
       }
     }
