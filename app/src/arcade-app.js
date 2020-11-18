@@ -8,7 +8,7 @@ import { ArcadeBooks } from './arcade-books';
 
 console.info('ARCADE› Instantiating Apollo Client…');
 export const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: 'http://localhost:4001',
   cache: new InMemoryCache(),
 });
 
@@ -24,20 +24,14 @@ const BOOKS_QUERY = gql`
 
 @customElement('arcade-app')
 export class ArcadeApp extends LitElement {
-  static get properties() {
-    return {
-      title: { type: String },
-      books: { type: Array },
-      isOpen: { type: Boolean },
-    };
-  }
+  @property({ type: Boolean })
+  isOpen = false;
 
-  constructor() {
-    super();
-    this.title = 'D-Arcade';
-    this.books = undefined;
-    this.isOpen = false;
-  }
+  @property({ type: String })
+  title = 'D-Arcade';
+
+  @property({ type: Array })
+  books = undefined;
 
   connectedCallback() {
     super.connectedCallback();
@@ -48,9 +42,12 @@ export class ArcadeApp extends LitElement {
   }
 
   fetchBooks() {
-    console.log('ARCADE› fetchBooks() › Looking up available books…');
+    console.log('ArcadeApp› fetchBooks() › Looking up available books…');
     client.query({ query: BOOKS_QUERY }).then((result) => {
-      console.log('ARCADE› fetchBooks() › Books fetched:', result.data.books);
+      console.log(
+        'ArcadeApp› fetchBooks() › Books fetched:',
+        result.data.books,
+      );
       this.books = result.data.books;
     });
   }
@@ -59,8 +56,10 @@ export class ArcadeApp extends LitElement {
     return css`
       :host {
         min-height: 100vh;
+
         display: flex;
         flex-direction: column;
+
         align-items: center;
         justify-content: flex-start;
         font-size: calc(10px + 2vmin);
