@@ -56,30 +56,30 @@ let dictionary = {
   default: squareText(40, '?!'),
 };
 
-let layout0 = `x·P●x··x
-              xxxxxxxx`;
+const LAYOUT01 = `x·P●x··x
+                  xxxxxxxx`;
 
-let layout1 = `xxxxxxxxxxxxxxxx
-             xx·x●x····xx··x
-             x··x·P··x●x·xxx
-             xxMxxxx·xxx··xx
-             xx·x●x····xx··x
-             xx●···Fx··D···x
-             xxxxxxxxxxxxxxx`;
+const LAYOUT02 = `xxxxxxxxxxxxxxxx
+                  xx·x●x····xx··x
+                  x··x·P··x●x·xxx
+                  xxMxxxx·xxx··xx
+                  xx·x●x····xx··x
+                  xx●···Fx··D···x
+                  xxxxxxxxxxxxxxx`;
 
-let layout = `xxxxxxxxxxxxxxxxxxxxxxxxx
-             xx·x●x····xx··xxx·x●x···x
-             x··x·P··x●x·xxxxxMxxxx·xx
-             xxMxxxx·xxx··xxxxMxxxx·xx
-             xx·x●x····xx··xxxMxxxx·xx
-             xx●···Fx··D·············x
-             xx·xxxxxxxxxxxxxxMxxxx·xx
-             xx·x●x····xx··xxx·x●x···x
-             x··x·P··x●x·xxxxxMxxxx·xx
-             xxMx·xx·xxx··xxxxMxxxx·xx
-             xx·x●x····xx············x
-             xx●···Fx··D···xxxMxxxx·xx
-             xxxxxxxxxxxxxxxxxxxxxxxxx`;
+const LAYOUT03 = `xxxxxxxxxxxxxxxxxxxxxxxxx
+                  xx·x●x····xx··xxx·x●x···x
+                  x··x·P··x●x·xxxxxMxxxx·xx
+                  xxMxxxx·xxx··xxxxMxxxx·xx
+                  xx·x●x····xx··xxxMxxxx·xx
+                  xx●···Fx··D·············x
+                  xx·xxxxxxxxxxxxxxMxxxx·xx
+                  xx·x●x····xx··xxx·x●x···x
+                  x··x·P··x●x·xxxxxMxxxx·xx
+                  xxMx·xx·xxx··xxxxMxxxx·xx
+                  xx·x●x····xx············x
+                  xx●···Fx··D···xxxMxxxx·xx
+                  xxxxxxxxxxxxxxxxxxxxxxxxx`;
 
 // ============================================
 
@@ -95,7 +95,7 @@ export class HackBoard extends LitElement {
   cellSize = 50;
 
   @property({ type: String })
-  layout = layout;
+  layout = LAYOUT03;
 
   @property({ type: Object })
   dictionary = dictionary;
