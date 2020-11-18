@@ -7,7 +7,7 @@ import { ArcadeJson } from './arcade-json';
 import { ArcadeBooks } from './arcade-books';
 
 console.info('ARCADE› Instantiating Apollo Client…');
-const client = new ApolloClient({
+export const client = new ApolloClient({
   uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
 });
@@ -16,8 +16,8 @@ const BOOKS_QUERY = gql`
   query GetBooks {
     books {
       title
-      rating
       author
+      likes
     }
   }
 `;

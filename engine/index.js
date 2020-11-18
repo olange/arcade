@@ -10,7 +10,7 @@ const typeDefs = gql`
   type Book {
     title: String
     author: String
-    rating: Int
+    likes: Int
   }
 
   # The "Query" type is special: it lists all of the available queries that
@@ -18,29 +18,34 @@ const typeDefs = gql`
   # case, the "books" query returns an array of zero or more Books (defined above).
   type Query {
     books: [Book]
+    book(bookId: Int): Book
+  }
+
+  type Mutation {
+    bookLike(bookId: Int): Book
   }
 `;
 
 const books = [
   {
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-    rating: 5
+    title: "Harry Potter and the Chamber of Secrets",
+    author: "J.K. Rowling",
+    likes: 0,
   },
   {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-    rating: 4
+    title: "Jurassic Park",
+    author: "Michael Crichton",
+    likes: 0,
   },
   {
-    title: 'The Plague',
-    author: 'Albert Camus',
-    rating: 10
+    title: "The Plague",
+    author: "Albert Camus",
+    likes: 0,
   },
   {
-    title: 'L\'Assomoir',
-    author: 'Emile Zola',
-    rating: 7
+    title: "L'Assomoir",
+    author: "Emile Zola",
+    likes: 0,
   },
 ];
 
@@ -49,6 +54,14 @@ const books = [
 const resolvers = {
   Query: {
     books: () => books,
+    book: (obj, args) => books[args.bookId],
+  },
+  Mutation: {
+    bookLike: (root, args) => {
+      console.log("bookLike:", args, args.bookId);
+      books[args.bookId].likes++;
+      return books[args.bookId];
+    },
   },
 };
 
