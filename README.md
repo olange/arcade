@@ -1,5 +1,11 @@
 # Explore PIXI v5
 
+## Objectives
+
+1. draw a hexagonal grid OK
+2. add interactions and animations OK
+3. find code patterns for using and/or extending PIXI
+
 ## View
 
     1. launch a server, e.g. python -m http.server 9000
