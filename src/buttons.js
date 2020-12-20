@@ -2,7 +2,7 @@
  * Create a text button
  * @param x, y: position of the button center
  * @param text: button text
- * @param fncButtonUp(text): callback on button up
+ * @param fncButtonUp(text): callback on buttonUp
  *
  * Usage example:
  *  app.stage.addChild(

@@ -1,65 +1,66 @@
+import { AppCircles } from "./app-circles.js";
 import { TextButton } from "./buttons.js";
 
 PIXI.utils.sayHello();
 
-// Create the application
-const app = new PIXI.Application({
-  width: 600,
-  height: 400,
-});
+// ------------------------------
+// Prepare replaceCurrentApp
+// ------------------------------
 
-// Create the buttons application
-const appButtons = new PIXI.Application({
-  width: 600,
+let currentApp = null;
+
+function replaceCurrentApp(name) {
+  console.log("replaceApp", name);
+
+  if (currentApp) {
+    currentApp.stop();
+    currentApp.destroy(true, true);
+    currentApp = null;
+  }
+  console.log("replaceApp", currentApp);
+
+  if (name == "one") {
+    currentApp = new AppCircles({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  } else {
+    currentApp = new PIXI.Application({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      backgroundColor: 0x336699,
+    });
+    const style = new PIXI.TextStyle({
+      fontFamily: "Helvetica",
+      fill: ["white", "orange"],
+    });
+    const text = new PIXI.Text("Watch This Space", style);
+    text.x = window.innerWidth / 2;
+    text.y = window.innerHeight / 2;
+    text.anchor.set(0.5);
+    currentApp.stage.addChild(text);
+  }
+  document.body.appendChild(currentApp.view);
+}
+
+// --------------------------
+// Create the menuApplication
+// --------------------------
+
+const menuApplication = new PIXI.Application({
+  width: window.innerWidth,
   height: 60,
 });
+// add menuApplication first
+document.body.appendChild(menuApplication.view);
 
-// Add the views to the DOM
-document.body.appendChild(appButtons.view);
-document.body.appendChild(app.view);
-
-// ---------------------------------------
-// app
-
-// add display objects, like a sprite:
-
-let hexa = PIXI.Sprite.from("assets/7-hexagons.png");
-app.stage.addChild(hexa);
-hexa.anchor.set(0.5);
-hexa.x = 0;
-hexa.y = 0;
-
-// start animating
-animate();
-function animate() {
-  requestAnimationFrame(animate);
-
-  // rotate the sprite
-  hexa.rotation += 0.02;
-
-  // render the container
-  app.renderer.render(app.stage);
-}
-
-// ---------------------------------------
-// appButtons
-
-function textButtonUp(text) {
-  console.log(text);
-}
-
-appButtons.stage.addChild(
-  new TextButton(60, 30, "one", (text) => console.log(text))
+menuApplication.stage.addChild(
+  new TextButton(60, 30, "one", replaceCurrentApp)
 );
 
-appButtons.stage.addChild(
-  new TextButton(120, 30, "two", (text) => console.log(text))
+menuApplication.stage.addChild(
+  new TextButton(120, 30, "two", replaceCurrentApp)
 );
-var textButton3 = new TextButton(180, 30, "three", textButtonUp);
-var textButton4 = new TextButton(240, 30, "four", (text) => console.log(text));
 
-appButtons.stage.addChild(textButton3);
-appButtons.stage.addChild(textButton4);
-appButtons.stage.addChild(
-  new TextButton(300, 30, "five", (text) => console.log(text))
-);
+// add currentApp next
+replaceCurrentApp("one");
