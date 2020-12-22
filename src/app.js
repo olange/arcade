@@ -1,10 +1,3 @@
-import {
-  makeCircle,
-  makeSquare,
-  makeHexagon,
-  makeHexaGrid,
-} from "./hexagons.js";
-
 import { HexaApplication } from "./hexaapp.js";
 
 PIXI.utils.sayHello();
