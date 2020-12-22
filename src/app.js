@@ -3,7 +3,7 @@ import { HexaApplication } from "./hexaapp.js";
 PIXI.utils.sayHello();
 
 import { AppCircles } from "./app-circles.js";
-import { TextButton } from "./buttons.js";
+import { TextButton, TextButton2, CircleButton3 } from "./buttons.js";
 
 // ------------------------------
 // Prepare replaceCurrentApp
@@ -12,7 +12,7 @@ import { TextButton } from "./buttons.js";
 let currentApp = null;
 
 function replaceCurrentApp(name) {
-  console.log("replaceApp", name);
+  console.log("replaceCurrentApp", name);
   const w = window.innerWidth;
   const h = window.innerHeight;
 
@@ -22,7 +22,7 @@ function replaceCurrentApp(name) {
     currentApp.destroy(true, true);
     currentApp = null;
   }
-  console.log("replaceApp", currentApp);
+  console.log("replaceCurrentApp currentApp=", currentApp);
 
   if (name == "one") {
     // create AppCircles
@@ -30,7 +30,7 @@ function replaceCurrentApp(name) {
       width: w,
       height: h,
     });
-  } else if (name == "two") {
+  } else if (name == "two" || name == "four") {
     // create HexaApplication
     currentApp = new HexaApplication({
       width: w,
@@ -79,6 +79,14 @@ menuApplication.stage.addChild(
 
 menuApplication.stage.addChild(
   new TextButton(180, 30, "three", replaceCurrentApp)
+);
+
+menuApplication.stage.addChild(
+  new TextButton2(replaceCurrentApp, 240, 30, "four")
+);
+
+menuApplication.stage.addChild(
+  new CircleButton3(replaceCurrentApp, 320, 30, 15, 0xffffff, 0x000000, "five")
 );
 
 // add currentApp next

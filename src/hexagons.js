@@ -7,6 +7,7 @@ TODO
 - can we put the drag functions into a mixin?
 - makeHexaGrid: convert to a class
 - DraggableHexagon2: also handle vertical
+- add keyboard interactions for hexagons
 */
 
 // -------
@@ -263,7 +264,7 @@ function toHexagonPosition(p) {
 export class DraggableHexagon2 extends PIXI.Graphics {
   constructor(x, y, side) {
     super();
-    console.log("DraggableHexagon", x, y, side);
+    //console.log("DraggableHexagon", x, y, side);
 
     this.hexagonHeight2 = side * Math.sqrt(3);
     this.side = side;
