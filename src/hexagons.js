@@ -7,6 +7,10 @@ TODO
 - can we put the drag functions into a mixin?
 + makeHexaGrid: convert to class HexaGrid
 - add keyboard interactions for hexagons and other shapes
+
+- DragMixin: drag w/o snap: simply return p in toHexagonPosition2
+- DragMixin: drag with snap, generalized using x and y granularity
+- it might be possible to separate snapping into SnapMixin
 */
 
 // -------
@@ -380,6 +384,9 @@ export let DragMixin = (superclass) =>
       console.log("DragMixin", ...arguments);
       super(...rest);
 
+      this.hexagonHeight2 = side * Math.sqrt(3);
+      this.side = side;
+
       this.interactive = true;
       this.buttonMode = true;
 
@@ -441,6 +448,7 @@ export let DragMixin = (superclass) =>
       }
       console.log("DragMixin.toHexagonPosition", p, newP);
       return newP;
+      //return p;
     }
   };
 
