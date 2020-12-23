@@ -1,5 +1,9 @@
+function onTouchDown2(e) {
+  console.log("onTouchDown", e);
+}
+
 /**
- * Create a text button
+ * Creates a text button
  * @param x, y: position of the button center
  * @param text: button text
  * @param fncButtonUp(text): callback on buttonUp
@@ -9,53 +13,53 @@
  *      new TextButton(350, 30, "five", (text) => console.log(text))
  *  );
  */
-export class TextButton extends PIXI.Text {
-  constructor(x, y, text, fncButtonUp) {
-    super(text, {
-      font: "bold 32px Roboto",
-      fill: "#e74c3c",
-    });
-    this.x = x;
-    this.y = y;
-    this.fncButtonUp = fncButtonUp;
+// export class TextButton extends PIXI.Text {
+//   constructor(x, y, text, fncButtonUp) {
+//     super(text, {
+//       font: "bold 32px Roboto",
+//       fill: "#e74c3c",
+//     });
+//     this.x = x;
+//     this.y = y;
+//     this.fncButtonUp = fncButtonUp;
 
-    this.anchor.set(0.5);
-    this.interactive = true;
-    this.buttonMode = true;
-    this.on("pointerdown", this.onButtonDown)
-      .on("pointerup", this.onButtonUp)
-      .on("pointerupoutside", this.onButtonUp)
-      .on("pointerover", this.onButtonOver)
-      .on("pointerout", this.onButtonOut);
-  }
+//     this.anchor.set(0.5);
+//     this.interactive = true;
+//     this.buttonMode = true;
+//     this.on("pointerdown", this.onButtonDown)
+//       .on("pointerup", this.onButtonUp)
+//       .on("pointerupoutside", this.onButtonUp)
+//       .on("pointerover", this.onButtonOver)
+//       .on("pointerout", this.onButtonOut);
+//   }
 
-  onButtonDown() {
-    this.isdown = true;
-    this.alpha = 0.8;
-    //console.log("down");
-  }
+//   onButtonDown() {
+//     this.isdown = true;
+//     this.alpha = 0.8;
+//     //console.log("down");
+//   }
 
-  onButtonUp() {
-    this.isdown = false;
-    this.alpha = 1.0;
-    //console.log("up", this.text);
-    if (typeof this.fncButtonUp === "function") {
-      this.fncButtonUp(this.text);
-    }
-  }
+//   onButtonUp() {
+//     this.isdown = false;
+//     this.alpha = 1.0;
+//     //console.log("up", this.text);
+//     if (typeof this.fncButtonUp === "function") {
+//       this.fncButtonUp(this.text);
+//     }
+//   }
 
-  onButtonOver() {
-    this.isOver = true;
-    this.alpha = 0.8;
-    //console.log("over");
-  }
+//   onButtonOver() {
+//     this.isOver = true;
+//     this.alpha = 0.8;
+//     //console.log("over");
+//   }
 
-  onButtonOut() {
-    this.isOver = false;
-    this.alpha = 1.0;
-    //console.log("out");
-  }
-}
+//   onButtonOut() {
+//     this.isOver = false;
+//     this.alpha = 1.0;
+//     //console.log("out");
+//   }
+// }
 
 /**
  * Displays the text
@@ -118,10 +122,41 @@ export let PushbuttonMixin = (superclass) =>
   };
 
 /**
- * Displays a text pushbutton
- * On click calls onClick
+ * Provides onClick behavior for subclasses
+ * On click event calls onClick(text)
+ *
+ * @param {*} onClick - callback(text)
+ * @param  {...any} rest - arguments for the superclass
  */
-export class TextButton2 extends PushbuttonMixin(Text) {
+export let ClickMixin = (superclass) =>
+  class extends superclass {
+    constructor(onClick, ...rest) {
+      //console.log("ClickMixin", ...arguments);
+      super(...rest);
+      try {
+        this.anchor.set(0.5);
+      } catch (error) {}
+      this.interactive = true;
+      this.buttonMode = true;
+      this.on("click", () => {
+        onClick(this.text);
+      });
+    }
+  };
+
+/**
+ * Creates a text pushbutton
+ * On click event calls onClick
+ *  app.stage.addChild(
+ *      new TextButton2(350, 30, "five", (text) => console.log(text))
+ *  );
+ *
+ * @param {*} onClick - callback(text)
+ * @param {*} x - center.x
+ * @param {*} y - center.y
+ * @param {*} text - button text + identifier in callback
+ */
+export class TextButton extends ClickMixin(Text) {
   constructor(onClick, x, y, text) {
     //console.log("TextButton2", ...arguments);
     super(...arguments);
@@ -129,7 +164,13 @@ export class TextButton2 extends PushbuttonMixin(Text) {
 }
 
 /**
- * Displays a circle
+ * Creates a circle
+ *
+ * @param {*} x
+ * @param {*} y
+ * @param {*} radius
+ * @param {*} fillcolor
+ * @param {*} strokecolor
  */
 export class Circle3 extends PIXI.Graphics {
   constructor(x, y, radius, fillcolor, strokecolor) {
@@ -142,8 +183,20 @@ export class Circle3 extends PIXI.Graphics {
 }
 
 /**
- * Displays a circle pushbutton
+ * Creates a circle pushbutton
  * On click calls onClick
+ *
+ * @param {*} onClick - callback()
+ * @param {*} x
+ * @param {*} y
+ * @param {*} radius
+ * @param {*} fillcolor
+ * @param {*} strokecolor
+ *
+ * Usage example:
+ *   menuApplication.stage.addChild(
+ *       new CircleButton3(replaceCurrentApp, 320, 30, 15, 0xffffff, 0x000000)
+ *   );
  */
 export class CircleButton3 extends PushbuttonMixin(Circle3) {
   constructor(onClick, x, y, radius, fillcolor, strokecolor) {

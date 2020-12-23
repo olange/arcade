@@ -3,7 +3,7 @@ import { HexaApplication } from "./hexaapp.js";
 PIXI.utils.sayHello();
 
 import { AppCircles } from "./app-circles.js";
-import { TextButton, TextButton2, CircleButton3 } from "./buttons.js";
+import { TextButton, CircleButton3 } from "./buttons.js";
 
 // ------------------------------
 // Prepare replaceCurrentApp
@@ -70,19 +70,19 @@ const menuApplication = new PIXI.Application({
 document.body.appendChild(menuApplication.view);
 
 menuApplication.stage.addChild(
-  new TextButton(60, 30, "one", replaceCurrentApp)
+  new TextButton(replaceCurrentApp, 60, 30, "one")
 );
 
 menuApplication.stage.addChild(
-  new TextButton(120, 30, "two", replaceCurrentApp)
+  new TextButton(replaceCurrentApp, 120, 30, "two")
 );
 
 menuApplication.stage.addChild(
-  new TextButton(180, 30, "three", replaceCurrentApp)
+  new TextButton(replaceCurrentApp, 180, 30, "three")
 );
 
 menuApplication.stage.addChild(
-  new TextButton2(replaceCurrentApp, 240, 30, "four")
+  new TextButton(replaceCurrentApp, 240, 30, "four")
 );
 
 menuApplication.stage.addChild(

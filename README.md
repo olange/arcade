@@ -25,3 +25,5 @@ added class AppCircles.
 `menuApplication = new PIXI.Application`
 
 Lets the user swap between two (potentially more) PIXI Applications.
+
+Draggable hexagons and Hexagrids inspired by [Dragable hexagon by pixi.js by zeakd](https://codepen.io/zeakd/pen/NdMBgB).
