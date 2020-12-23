@@ -1,6 +1,8 @@
 import {
-  Circle2,
+  Circle,
+  DraggableCircle,
   Square,
+  DraggableSquare,
   HexaGrid,
   DragHexagons,
   Hexagon,
@@ -65,10 +67,11 @@ export class HexaApplication extends PIXI.Application {
     let dragHexagons = new DragHexagons();
     this.stage.addChild(dragHexagons);
 
-    let circle2 = new Circle2(100, 200, 100, 0x222222, 0x778899);
-    this.stage.addChild(circle2);
+    this.stage.addChild(new Circle(100, 100, 50, 0x222222, 0x778899));
+    this.stage.addChild(new DraggableCircle(100, 200, 50, 0x222222, 0xff8899));
 
-    this.stage.addChild(new Square(100, 400, 80, 0xbbbbbb, 0x778899));
+    this.stage.addChild(new Square(200, 100, 100, 0xbbbbbb, 0x778899));
+    this.stage.addChild(new DraggableSquare(200, 200, 100, 0x222222, 0xff8899));
 
     this.stage.addChild(new Hexagon(40, 540, 40, true, 0xffffff, 0xff0000));
     this.stage.addChild(new Hexagon(120, 540, 40, true, 0xffffff, 0x00ff00));
