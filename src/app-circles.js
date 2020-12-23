@@ -1,17 +1,16 @@
 // ------------------------------------------
 // based on https://codepen.io/yutakam80/pen/EVodQJ
 
-class Circle_1 extends PIXI.Container {
+class Circle_1 extends PIXI.Graphics {
   constructor() {
     super();
 
     let radius = Math.floor(Math.random() * 20 + 1);
     this.alpha = Math.random();
 
-    this.graphics = new PIXI.Graphics();
-    this.graphics.beginFill(0xf00d0f, 1);
-    this.graphics.drawCircle(0, 0, radius);
-    this.addChild(this.graphics);
+    this.beginFill(0xf00d0f, 1);
+    this.drawCircle(0, 0, radius);
+    this.endFill();
   }
 }
 
