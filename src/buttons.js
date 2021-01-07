@@ -114,12 +114,13 @@ export class TextButton extends ClickMixin(Text) {
  * @param {*} strokecolor
  */
 export class Circle3 extends PIXI.Graphics {
-  constructor(x, y, radius, fillcolor, strokecolor) {
+  constructor(x, y, radius, fillcolor, strokecolor, text) {
     super();
     this.lineStyle(1, strokecolor);
     this.beginFill(fillcolor, 1.0);
     this.drawCircle(x, y, radius);
     this.endFill();
+    this.text = text;
   }
 }
 
