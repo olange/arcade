@@ -1,9 +1,29 @@
 import { HexaApplication } from "./hexaapp.js";
+import { AppCircles } from "./app-circles.js";
+import { TextButton, CircleButton3 } from "./buttons.js";
 
 PIXI.utils.sayHello();
 
-import { AppCircles } from "./app-circles.js";
-import { TextButton, CircleButton3 } from "./buttons.js";
+// -----------------------------
+// Define the DefaultApplication
+// -----------------------------
+
+class DefaultApplication extends PIXI.Application {
+  constructor(options) {
+    super(options);
+    console.log("DefaultApplication", options);
+
+    let style = new PIXI.TextStyle({
+      fontFamily: "Helvetica",
+      fill: ["white", "orange"],
+    });
+    const text = new PIXI.Text("Watch This Space ...", style);
+    text.x = options.width / 2;
+    text.y = options.height / 2;
+    text.anchor.set(0.5);
+    this.stage.addChild(text);
+  }
+}
 
 // ------------------------------
 // Prepare replaceCurrentApp
@@ -22,7 +42,6 @@ function replaceCurrentApp(name) {
     currentApp.destroy(true, true);
     currentApp = null;
   }
-  console.log("replaceCurrentApp currentApp=", currentApp);
 
   if (name == "one") {
     // create AppCircles
@@ -39,21 +58,12 @@ function replaceCurrentApp(name) {
       antialias: true,
     });
   } else {
-    // create the default application
-    currentApp = new PIXI.Application({
+    // create the DefaultApplication
+    currentApp = new DefaultApplication({
       width: w,
       height: h,
       backgroundColor: 0x336699,
     });
-    const style = new PIXI.TextStyle({
-      fontFamily: "Helvetica",
-      fill: ["white", "orange"],
-    });
-    const text = new PIXI.Text("Watch This Space", style);
-    text.x = w / 2;
-    text.y = h / 2;
-    text.anchor.set(0.5);
-    currentApp.stage.addChild(text);
   }
   document.body.appendChild(currentApp.view);
 }
