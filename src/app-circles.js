@@ -2,12 +2,10 @@
 // based on https://codepen.io/yutakam80/pen/EVodQJ
 
 class Circle_1 extends PIXI.Graphics {
-  constructor() {
+  constructor(radius, alpha) {
     super();
 
-    let radius = Math.floor(Math.random() * 20 + 1);
-    this.alpha = Math.random();
-
+    this.alpha = alpha;
     this.beginFill(0xf00d0f, 1);
     this.drawCircle(0, 0, radius);
     this.endFill();
@@ -21,13 +19,15 @@ class CircleContainer extends PIXI.Container {
     this.circles = new Array();
     this.w = width;
     this.h = height;
-
     this.addCircles();
   }
 
   addCircles() {
     for (var i = 0; i < 400; i++) {
-      let circle = new Circle_1();
+      let radius = Math.floor(Math.random() * 20 + 1);
+      let alpha = Math.random();
+
+      let circle = new Circle_1(radius, alpha);
       this.circles.push(circle);
       circle.count = this.w * Math.random();
       circle.reg = Math.random() * 10 + 1;
