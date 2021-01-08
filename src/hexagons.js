@@ -4,13 +4,61 @@ TODO
 - use the same data/functions in placing hexagons onto the grid
 - make onDragSnap work correctly for both orientations of hexagons
 + reactivate dragging of hexagons
-- can we put the drag functions into a mixin?
++ can we put the drag functions into a mixin? yes
 + makeHexaGrid: convert to class HexaGrid
 - add keyboard interactions for hexagons and other shapes
 
-- DragMixin: drag w/o snap: simply return p in toHexagonPosition2
-- DragMixin: drag with snap, generalized using x and y granularity
-- it might be possible to separate snapping into SnapMixin
++ DragMixin: drag w/o snap: simply return p in toHexagonPosition2
+- SnapMixin: snap to discrete positions initially and on change of position
+- DragSnapMixin: drag with snap, generalized using x and y granularity
+
+HEXAGON CODE PATTERNS
+
+• new Hexagon(x, y, side, vertical, fillcolor, strokecolor) - draws a vertical or horizontal hexagon
+
+• new DraggableHexagon(x, y, side) - draws a horizontal hexagon that snaps to discrete positions when dragged
+  - has a method, toHexagonPosition2(newPosition) that returns the discrete position for the given newPosition
+  - toHexagonPosition2(newPosition) can be used ba a parent object to place the hexaon initially to a discrete position
+  - see class DragHexagons for an example
+
+• new DragHexagons - creates a fixed number (10) of DraggableHexagon instances, placed on radomly onto a horizontal hexagon grid
+
+• new HexaGrid(nx, ny, x, y, r, vertical, fillcolor, strokecolor) - creates a grid of nx * ny Hexagon instances
+  - in constructor implements own version of algorithm for placing hexagons to discrete positions 
+
+• let HexaDragMixin = (superclass) => class extends superclass - mixin, provides the draggable horizontal hexagon snap-to-grid behavior
+
+• new DraggableHexagon3(x, y, side, vertical, fillcolor, strokecolor) - creates a draggable horizontal hexagon 
+  - equivalent to DraggableHexagon [TODO make it a drop-in replacement for Hexagon]
+  - extends HexaDragMixin(Hexagon)
+
+DRAGGABLE CODE PATTERNS
+
+• new Circle(x, y, radius, fillcolor, strokecolor) - creates a Circle instance
+• new Square(x, y, side, fillcolor, strokecolor) - creates a Square instance
+
+• let DragMixin = (superclass) => class extends superclass - mixin, provides the drag behavior (not snapping)
+
+• new DraggableCircle(x, y, radius, fillcolor, strokecolor) - creates a Circle that can be dragged
+ - extends DragMixin(Circle)
+
+• new DraggableSquare(x, y, side, vertical, fillcolor, strokecolor) - creates a Square that can be dragged
+  - extends DragMixin(Square)
+
+PASSING ARGUMENTS BETWEEN CLASS AND SUPERCLASS (POSSIBLY A MIXIN)
+
+There are two possibilities
+
+• list of positional arguments
+  - compact
+  - can peel off arguments
+  - simpler if taking from the front of the list, see PushbuttonMixin for an example
+
+• a js object (aka dictionary)
+  - more verbose, but self-documented
+  - more flexible
+
+PIXI v5 uses the js object pattern (cf. options argument to PIXI.Application)
 */
 
 // -------
@@ -138,33 +186,33 @@ export class Hexagon extends PIXI.Graphics {
  * @param {*} strokecolor
  */
 export class HexaGrid extends PIXI.Container {
-  constructor(nx, ny, x, y, r, vertical, fillcolor, strokecolor) {
+  constructor(nx, ny, x, y, side, vertical, fillcolor, strokecolor) {
     super();
-    //console.log("HexaGrid", nx, ny, x, y, r, vertical, fillcolor, strokecolor);
+    //console.log("HexaGrid", nx, ny, x, y, side, vertical, fillcolor, strokecolor);
     const c30 = Math.sqrt(3) / 2;
     if (vertical) {
-      var dx = r * 2 * c30;
-      var dy = r * 1.5;
+      var dx = side * 2 * c30;
+      var dy = side * 1.5;
     } else {
-      var dx = r * 1.5;
-      var dy = r * 2 * c30;
+      var dx = side * 1.5;
+      var dy = side * 2 * c30;
     }
 
     let hexagons = [];
     for (let i = 0; i < nx; i++) {
       for (let j = 0; j < ny; j++) {
         if (vertical) {
-          var sx = r * c30 * (j % 2);
+          var sx = side * c30 * (j % 2);
           var sy = 0;
         } else {
           var sx = 0;
-          var sy = r * c30 * (i % 2);
+          var sy = side * c30 * (i % 2);
         }
 
         let hexagon = new Hexagon(
           x + sx + i * dx,
           y + sy + j * dy,
-          r,
+          side,
           vertical,
           fillcolor,
           strokecolor
