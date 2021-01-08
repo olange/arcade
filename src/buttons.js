@@ -118,9 +118,11 @@ export class Circle3 extends PIXI.Graphics {
     super();
     this.lineStyle(1, strokecolor);
     this.beginFill(fillcolor, 1.0);
-    this.drawCircle(x, y, radius);
+    this.drawCircle(0, 0, radius);
     this.endFill();
     this.text = text;
+    this.x = x;
+    this.y = y;
   }
 }
 
