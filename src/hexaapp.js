@@ -37,7 +37,7 @@ export class HexaApplication extends PIXI.Application {
     let side = 40;
 
     // add horizontal grid
-    let horizontalGrid = new HexaGrid(15, 8, 0, 0, side, false, null, 0x00cc77);
+    let horizontalGrid = new HexaGrid(15, 6, 0, 0, side, false, null, 0x00cc77);
     this.stage.addChild(horizontalGrid);
 
     // add vertical grid
@@ -45,7 +45,7 @@ export class HexaApplication extends PIXI.Application {
       16,
       4,
       0,
-      15 * side,
+      12 * side,
       side,
       true,
       null,
@@ -73,20 +73,24 @@ export class HexaApplication extends PIXI.Application {
     this.stage.addChild(new Square(200, 100, 100, 0xbbbbbb, 0x778899));
     this.stage.addChild(new DraggableSquare(200, 200, 100, 0x222222, 0xff8899));
 
-    this.stage.addChild(new Hexagon(40, 540, 40, true, 0xffffff, 0xff0000));
-    this.stage.addChild(new Hexagon(120, 540, 40, true, 0xffffff, 0x00ff00));
-    this.stage.addChild(new Hexagon(200, 540, 40, true, 0xffffff, 0x0000ff));
+    // this.stage.addChild(new Hexagon(40, 540, 40, true, 0xffffff, 0xff0000));
+    // this.stage.addChild(new Hexagon(120, 540, 40, true, 0xffffff, 0x00ff00));
+    // this.stage.addChild(new Hexagon(200, 540, 40, true, 0xffffff, 0x0000ff));
 
-    this.stage.addChild(new Hexagon(40, 620, 40, false, 0xff0000, 0xffffff));
-    this.stage.addChild(new Hexagon(120, 620, 40, false, 0x00ff00, 0xffffff));
-    this.stage.addChild(new Hexagon(200, 620, 40, false, 0x0000ff, 0xffffff));
+    // this.stage.addChild(new Hexagon(40, 620, 40, false, 0xff0000, 0xffffff));
+    // this.stage.addChild(new Hexagon(120, 620, 40, false, 0x00ff00, 0xffffff));
+    // this.stage.addChild(new Hexagon(200, 620, 40, false, 0x0000ff, 0xffffff));
+
+    // this.stage.addChild(
+    //   new DraggableHexagon(40, 720, 40, false, 0xff0000, 0xffffff)
+    // );
 
     this.stage.addChild(
-      new DraggableHexagon(40, 720, 40, false, 0xff0000, 0xffffff)
+      new DraggableHexagon3(120, 720, 40, false, 0x00cc77, 0xffffff)
     );
 
     this.stage.addChild(
-      new DraggableHexagon3(120, 720, 40, false, 0xffff00, 0xffffff)
+      new DraggableHexagon3(200, 720, 40, true, 0xff5522, 0xffffff)
     );
   }
 }
