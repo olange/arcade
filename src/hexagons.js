@@ -394,6 +394,10 @@ export let HexaDragMixin = (superclass) =>
         .on("pointerup", this.onDragEnd2)
         .on("pointerupoutside", this.onDragEnd2)
         .on("pointermove", this.onDragMove2);
+
+      let discretePos = this.discreteHexPosition(this.x, this.y);
+      this.x = discretePos.x;
+      this.y = discretePos.y;
     }
 
     onDragStart2(event) {
@@ -414,13 +418,18 @@ export let HexaDragMixin = (superclass) =>
 
     onDragMove2() {
       if (this.dragging) {
-        var newPosition = this.data.getLocalPosition(this.parent);
-        var hexaP = this.vertical
-          ? this.verticalHexPosition(newPosition)
-          : this.horizontalHexPosition(newPosition);
+        let newPos = this.data.getLocalPosition(this.parent);
+        let hexaP = this.discreteHexPosition(newPos.x, newPos.y);
         this.x = hexaP.x;
         this.y = hexaP.y;
       }
+    }
+
+    discreteHexPosition(x, y) {
+      let p = new PIXI.Point(x, y);
+      return this.vertical
+        ? this.verticalHexPosition(p)
+        : this.horizontalHexPosition(p);
     }
 
     verticalHexPosition(p) {
