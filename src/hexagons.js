@@ -376,17 +376,11 @@ export let HexaDragMixin = (superclass) =>
       super(...rest);
       //   console.log("HexaDragMixin", this.side); // from the superclass
 
-      if (this.vertical) {
-        this.step_x = this.side * Math.sqrt(3);
-        this.step_y = this.side * 1.5;
-        this.odd_offset_x = this.step_x / 2;
-        this.odd_offset_y = 0;
-      } else {
-        this.step_x = this.side * 1.5;
-        this.step_y = this.side * Math.sqrt(3);
-        this.odd_offset_x = 0;
-        this.odd_offset_y = this.step_y / 2;
-      }
+      // horizontal
+      this.step_x = this.side * 1.5;
+      this.step_y = this.side * Math.sqrt(3);
+      this.odd_offset_x = 0;
+      this.odd_offset_y = this.step_y / 2;
 
       this.interactive = true;
       this.buttonMode = true;
@@ -429,37 +423,17 @@ export let HexaDragMixin = (superclass) =>
       }
     }
 
-    // onDragSnap2() {
-    //   // same as onDragMove2
-    //   if (this.dragging) {
-    //     var newPosition = this.data.getLocalPosition(this.parent);
-    //     var hexaP = this.toHexagonPosition2(newPosition);
-    //     this.x = hexaP.x;
-    //     this.y = hexaP.y;
-    //   }
-    // }
-
     verticalHexPosition(p) {
-      var newP = {};
-      var yIndex = Math.round(p.y / this.step_y);
-      newP.y = yIndex * this.step_y;
-      //var quot = p.y / this.step_y;
-      if (yIndex % 2) {
-        var xIndex = Math.floor(p.x / this.step_x);
-        newP.x = xIndex * this.step_x + this.odd_offset_x;
-      } else {
-        var xIndex = Math.round(p.x / this.step_x);
-        newP.x = xIndex * this.step_x;
-      }
-      //console.log("verticalHexPosition", p, newP, xIndex, yIndex);
-      return newP;
+      [p.y, p.x] = [p.x, p.y];
+      p = this.horizontalHexPosition(p);
+      [p.y, p.x] = [p.x, p.y];
+      return p;
     }
 
     horizontalHexPosition(p) {
       var newP = {};
       var xIndex = Math.round(p.x / this.step_x);
       newP.x = xIndex * this.step_x;
-      //var quot = p.y / this.step_y;
       if (xIndex % 2) {
         var yIndex = Math.floor(p.y / this.step_y);
         newP.y = yIndex * this.step_y + this.odd_offset_y;
@@ -483,14 +457,6 @@ export let HexaDragMixin = (superclass) =>
         var yIndex = Math.round(p.y / this.step_y);
         newP.y = yIndex * this.step_y;
       }
-      //   console.log(
-      //     "HexaDragMixin.toHexagonPosition",
-      //     p,
-      //     newP,
-      //     xIndex,
-      //     yIndex,
-      //     quot
-      //   );
       return newP;
     }
 
@@ -506,14 +472,6 @@ export let HexaDragMixin = (superclass) =>
         var yIndex = Math.round(p.y / this.step_y);
         newP.y = yIndex * this.step_y;
       }
-      //   console.log(
-      //     "HexaDragMixin.toHexagonPosition",
-      //     p,
-      //     newP,
-      //     xIndex,
-      //     yIndex,
-      //     quot
-      //   );
       return newP;
     }
   };
