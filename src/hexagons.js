@@ -12,30 +12,29 @@ TODO
 - SnapMixin: snap to discrete positions initially and on change of position
 - DragSnapMixin: drag with snap, generalized using x and y granularity
 
-HEXAGON CODE PATTERNS
+- define SnapToHexPosMixin, combine with DragMixin
+
+SHAPE CODE PATTERNS
+
+• new Circle(x, y, radius, fillcolor, strokecolor) - creates a Circle instance
+• new Square(x, y, side, fillcolor, strokecolor) - creates a Square instance
 
 • new Hexagon(x, y, side, vertical, fillcolor, strokecolor) - draws a vertical or horizontal hexagon
 
-• new DraggableHexagon(x, y, side) - draws a horizontal hexagon that snaps to discrete positions when dragged
-  - has a method, toHexagonPosition2(newPosition) that returns the discrete position for the given newPosition
-  - toHexagonPosition2(newPosition) can be used ba a parent object to place the hexaon initially to a discrete position
-  - see class DragHexagons for an example
+HEXAGON CODE PATTERNS
 
 • new DragHexagons - creates a fixed number (10) of DraggableHexagon instances, placed on radomly onto a horizontal hexagon grid
 
 • new HexaGrid(nx, ny, x, y, r, vertical, fillcolor, strokecolor) - creates a grid of nx * ny Hexagon instances
   - in constructor implements own version of algorithm for placing hexagons to discrete positions 
 
-• let HexaDragMixin = (superclass) => class extends superclass - mixin, provides the draggable horizontal hexagon snap-to-grid behavior
-
-• new DraggableHexagon3(x, y, side, vertical, fillcolor, strokecolor) - creates a draggable horizontal hexagon 
+• new DraggableHexagon(x, y, side, vertical, fillcolor, strokecolor) - creates a draggable (vertical or horizontal) hexagon 
   - equivalent to DraggableHexagon [TODO make it a drop-in replacement for Hexagon]
   - extends HexaDragMixin(Hexagon)
 
-DRAGGABLE CODE PATTERNS
+• let HexaDragMixin = (superclass) => class extends superclass - mixin, provides the draggable hexagon snap-to-grid behavior
 
-• new Circle(x, y, radius, fillcolor, strokecolor) - creates a Circle instance
-• new Square(x, y, side, fillcolor, strokecolor) - creates a Square instance
+OTHER DRAGGABLE CODE PATTERNS
 
 • let DragMixin = (superclass) => class extends superclass - mixin, provides the drag behavior (not snapping)
 
@@ -51,7 +50,7 @@ There are two possibilities
 
 • list of positional arguments
   - compact
-  - can peel off arguments
+  - a mixin can peel off arguments or get their values from superclass
   - simpler if taking from the front of the list, see PushbuttonMixin for an example
 
 • a js object (aka dictionary)
@@ -92,8 +91,8 @@ export class Circle extends PIXI.Graphics {
 /**
  * Creates a square
  *
- * @param {*} x    - origin.x
- * @param {*} y    - origin.y
+ * @param {*} x    - center.x
+ * @param {*} y    - center.y
  * @param {*} side
  * @param {*} fillcolor
  * @param {*} strokecolor
@@ -102,7 +101,7 @@ export class Square extends PIXI.Graphics {
   constructor(x, y, side, fillcolor, strokecolor) {
     super();
     this.lineStyle(1, strokecolor);
-    this.beginFill(fillcolor, 0.3);
+    this.beginFill(fillcolor, 0.5);
     let half = side / 2; // square centered on (0,0)
     this.drawPolygon([-half, -half, half, -half, half, half, -half, half]);
     this.endFill();
@@ -236,20 +235,26 @@ export class HexaGrid extends PIXI.Container {
  * at random positions
  * TODO: parametrize
  */
-export class DragHexagons extends PIXI.Container {
-  constructor() {
+export class DraggableHexagonCluster extends PIXI.Container {
+  constructor(vertical, fillcolor, strokecolor) {
     super();
     let hexagonSide = 40;
     this.app_stage_width = 500;
 
-    let sampleHexagon = new DraggableHexagon(0, 0, hexagonSide);
-
     for (var i = 0; i < 10; i++) {
-      var hexaP = sampleHexagon.toHexagonPosition2({
+      var hexaP = {
         x: Math.floor(Math.random() * this.app_stage_width),
         y: Math.floor(Math.random() * this.app_stage_width),
-      });
-      let hexagon = new DraggableHexagon(hexaP.x, hexaP.y, hexagonSide);
+      };
+      // DraggableHexagon(x, y, side, vertical, fillcolor, strokecolor)
+      let hexagon = new DraggableHexagon(
+        hexaP.x,
+        hexaP.y,
+        hexagonSide,
+        vertical,
+        fillcolor,
+        strokecolor
+      );
       this.addChild(hexagon);
     }
   }
@@ -263,112 +268,15 @@ function onTouchDown(e) {
 
 // ----------------------------------------------------
 
-/**
- * Creates an instance of a (horizontal) hexagon which is draggable
- * When dragged, snaps to discrete positions on a hexa grid
- *
- * @param {*} x - center.x
- * @param {*} y - center.y
- * @param {*} side
- */
-export class DraggableHexagon extends PIXI.Graphics {
-  constructor(x, y, side) {
-    super();
-    //console.log("DraggableHexagon", x, y, side);
-
-    this.hexagonHeight2 = side * Math.sqrt(3);
-    this.side = side;
-    let rInner = (side * Math.sqrt(3)) / 2;
-
-    //this.beginFill(0xff0000);
-    this.beginFill(0xff99aa);
-
-    this.drawPolygon([
-      -side,
-      0,
-      -side / 2,
-      rInner,
-      side / 2,
-      rInner,
-      side,
-      0,
-      side / 2,
-      -rInner,
-      -side / 2,
-      -rInner,
-    ]);
-
-    this.endFill();
-    this.x = x;
-    this.y = y;
-
-    // enable interactive and hand cursor on hover
-    this.interactive = true;
-    this.buttonMode = true;
-
-    // setup events for mouse + touch using the pointer events
-    this.on("pointerdown", this.onDragStart2)
-      .on("pointerup", this.onDragEnd2)
-      .on("pointerupoutside", this.onDragEnd2)
-      .on("pointermove", this.onDragMove2);
-
-    // this.addChild(hexagon);
-  }
-  onDragStart2(event) {
-    // store a reference to the data
-    // the reason for this is because of multitouch
-    // we want to track the movement of this particular touch
-    this.data = event.data;
-    this.alpha = 0.5;
-    this.dragging = true;
-  }
-
-  onDragEnd2() {
-    this.alpha = 1;
-    this.dragging = false;
-    // set the interaction data to null
-    this.data = null;
-  }
-
-  onDragMove2() {
-    if (this.dragging) {
-      var newPosition = this.data.getLocalPosition(this.parent);
-      var hexaP = this.toHexagonPosition2(newPosition);
-      this.x = hexaP.x;
-      this.y = hexaP.y;
-    }
-  }
-
-  onDragSnap2() {
-    // same as onDragMove2
-    if (this.dragging) {
-      var newPosition = this.data.getLocalPosition(this.parent);
-      var hexaP = this.toHexagonPosition2(newPosition);
-      this.x = hexaP.x;
-      this.y = hexaP.y;
-    }
-  }
-
-  toHexagonPosition2(p) {
-    var newP = {};
-    var xIdx = Math.round(p.x / (this.side * (3 / 2)));
-    newP.x = xIdx * (this.side * (3 / 2));
-    if (xIdx % 2) {
-      newP.y =
-        Math.floor(p.y / this.hexagonHeight2) * this.hexagonHeight2 +
-        this.hexagonHeight2 / 2;
-    } else {
-      newP.y = Math.round(p.y / this.hexagonHeight2) * this.hexagonHeight2;
-    }
-    //console.log("DraggableHexagon.toHexagonPosition", p, newP);
-    return newP;
-  }
-}
-
 // --------------------
 // Define HexaDragMixin
 // --------------------
 
+/**
+ * Adds hexgonal drag-and-snap behavior to the superclass Hexagon
+ *
+ * @param {*} superclass
+ */
 export let HexaDragMixin = (superclass) =>
   class extends superclass {
     constructor(...rest) {
@@ -382,41 +290,36 @@ export let HexaDragMixin = (superclass) =>
       this.odd_offset_x = 0;
       this.odd_offset_y = this.step_y / 2;
 
-      this.interactive = true;
-      this.buttonMode = true;
-
       // enable interactive mode and hand cursor on hover
       this.interactive = true;
       this.buttonMode = true;
 
       // setup events for mouse + touch using the pointer events
-      this.on("pointerdown", this.onDragStart2)
-        .on("pointerup", this.onDragEnd2)
-        .on("pointerupoutside", this.onDragEnd2)
-        .on("pointermove", this.onDragMove2);
+      this.on("pointerdown", this.onDragStart)
+        .on("pointerup", this.onDragEnd)
+        .on("pointerupoutside", this.onDragEnd)
+        .on("pointermove", this.onDragMove);
 
       let discretePos = this.discreteHexPosition(this.x, this.y);
       this.x = discretePos.x;
       this.y = discretePos.y;
     }
 
-    onDragStart2(event) {
+    onDragStart(event) {
       // store a reference to the data
-      // the reason for this is because of multitouch
-      // we want to track the movement of this particular touch
       this.data = event.data;
       this.alpha = 0.5;
       this.dragging = true;
-      this.onDragMove2();
+      this.onDragMove();
     }
 
-    onDragEnd2() {
+    onDragEnd() {
       this.alpha = 1;
       this.dragging = false;
       this.data = null;
     }
 
-    onDragMove2() {
+    onDragMove() {
       if (this.dragging) {
         let newPos = this.data.getLocalPosition(this.parent);
         let hexaP = this.discreteHexPosition(newPos.x, newPos.y);
@@ -426,7 +329,7 @@ export let HexaDragMixin = (superclass) =>
     }
 
     discreteHexPosition(x, y) {
-      let p = new PIXI.Point(x, y);
+      let p = { x: x, y: y };
       return this.vertical
         ? this.verticalHexPosition(p)
         : this.horizontalHexPosition(p);
@@ -473,7 +376,7 @@ export let HexaDragMixin = (superclass) =>
       var newP = {};
       var xIndex = Math.round(p.x / this.step_x);
       newP.x = xIndex * this.step_x;
-      //   var quot = p.y / this.step_y;
+      var quot = p.y / this.step_y;
       if (xIndex % 2) {
         var yIndex = Math.round((p.y - this.odd_offset_y) / this.step_y);
         newP.y = yIndex * this.step_y + this.odd_offset_y;
@@ -485,13 +388,29 @@ export let HexaDragMixin = (superclass) =>
     }
   };
 
-export class DraggableHexagon3 extends HexaDragMixin(Hexagon) {
+/**
+ * Creates a draggable hexagon
+ * When dragged, snaps to discrete positions on a hexagon grid
+ *
+ * @param {*} x - center.x
+ * @param {*} y - center.y
+ * @param {*} side  - hexagon side (aka radius)
+ * @param {*} vertical - if true: vertex on top else: side on top
+ * @param {*} fillcolor
+ * @param {*} strokecolor
+ */
+export class DraggableHexagon extends HexaDragMixin(Hexagon) {
   constructor(x, y, side, vertical, fillcolor, strokecolor) {
-    //console.log("DraggableHexagon3", ...arguments);
+    //console.log("DraggableHexagon", ...arguments);
     super(...arguments);
   }
 }
 
+/**
+ * Adds drag behavior to the superclass
+ *
+ * @param {*} superclass
+ */
 export let DragMixin = (superclass) =>
   class extends superclass {
     constructor(...rest) {
@@ -530,6 +449,15 @@ export let DragMixin = (superclass) =>
     }
   };
 
+/**
+ * Creates a draggable Circle
+ *
+ * @param {*} x - center.x
+ * @param {*} y - center.y
+ * @param {*} radius
+ * @param {*} fillcolor
+ * @param {*} strokecolor
+ */
 export class DraggableCircle extends DragMixin(Circle) {
   constructor(x, y, radius, fillcolor, strokecolor) {
     console.log("DraggableCircle", ...arguments);
@@ -537,8 +465,17 @@ export class DraggableCircle extends DragMixin(Circle) {
   }
 }
 
+/**
+ * Creates a draggable square
+ *
+ * @param {*} x - center.x
+ * @param {*} y - center.y
+ * @param {*} side
+ * @param {*} fillcolor
+ * @param {*} strokecolor
+ */
 export class DraggableSquare extends DragMixin(Square) {
-  constructor(x, y, side, vertical, fillcolor, strokecolor) {
+  constructor(x, y, side, fillcolor, strokecolor) {
     console.log("DraggableSquare", ...arguments);
     super(...arguments);
   }
