@@ -23,13 +23,13 @@ SHAPE CODE PATTERNS
 
 HEXAGON CODE PATTERNS
 
-• new DragHexagons - creates a fixed number (10) of DraggableHexagon instances, placed on radomly onto a horizontal hexagon grid
+• new DragSnapHexagonCluster - creates a fixed number (10) of DragSnapHexagon instances, placed radomly onto a horizontal hexagon grid
 
 • new HexaGrid(nx, ny, x, y, r, vertical, fillcolor, strokecolor) - creates a grid of nx * ny Hexagon instances
   - in constructor implements own version of algorithm for placing hexagons to discrete positions 
 
-• new DraggableHexagon(x, y, side, vertical, fillcolor, strokecolor) - creates a draggable (vertical or horizontal) hexagon 
-  - equivalent to DraggableHexagon [TODO make it a drop-in replacement for Hexagon]
+• new DragSnapHexagon(x, y, side, vertical, fillcolor, strokecolor) - creates a draggable snapping (vertical or horizontal) hexagon 
+  - equivalent to DragSnapHexagon [TODO make it a drop-in replacement for Hexagon]
   - extends HexaDragMixin(Hexagon)
 
 • let HexaDragMixin = (superclass) => class extends superclass - mixin, provides the draggable hexagon snap-to-grid behavior
@@ -235,7 +235,7 @@ export class HexaGrid extends PIXI.Container {
  * at random positions
  * TODO: parametrize
  */
-export class DraggableHexagonCluster extends PIXI.Container {
+export class DragSnapHexagonCluster extends PIXI.Container {
   constructor(vertical, fillcolor, strokecolor) {
     super();
     let hexagonSide = 40;
@@ -246,8 +246,8 @@ export class DraggableHexagonCluster extends PIXI.Container {
         x: Math.floor(Math.random() * this.app_stage_width),
         y: Math.floor(Math.random() * this.app_stage_width),
       };
-      // DraggableHexagon(x, y, side, vertical, fillcolor, strokecolor)
-      let hexagon = new DraggableHexagon(
+      // DragSnapHexagon(x, y, side, vertical, fillcolor, strokecolor)
+      let hexagon = new DragSnapHexagon(
         hexaP.x,
         hexaP.y,
         hexagonSide,
@@ -277,12 +277,12 @@ function onTouchDown(e) {
  *
  * @param {*} superclass
  */
-export let HexaDragMixin = (superclass) =>
+export let HexaDragSnapMixin = (superclass) =>
   class extends superclass {
     constructor(...rest) {
-      console.log("HexaDragMixin", ...rest);
+      console.log("HexaDragSnapMixin", ...rest);
       super(...rest);
-      //   console.log("HexaDragMixin", this.side); // from the superclass
+      //   console.log("HexaDragSnapMixin", this.side); // from the superclass
 
       // horizontal
       this.step_x = this.side * 1.5;
@@ -389,7 +389,89 @@ export let HexaDragMixin = (superclass) =>
   };
 
 /**
- * Creates a draggable hexagon
+ * Adds hexgonal snap behavior to the superclass
+ *
+ * @param {*} superclass
+ */
+export let HexaSnapMixin = (superclass) =>
+  class extends superclass {
+    constructor(...rest) {
+      console.log("HexaSnapMixin", ...rest);
+      super(...rest);
+
+      // horizontal
+      this.step_x = this.side * 1.5; // from superclass
+      this.step_y = this.side * Math.sqrt(3);
+      this.odd_offset_x = 0;
+      this.odd_offset_y = this.step_y / 2;
+
+      let discretePos = this.discreteHexPosition(this.x, this.y);
+      this.x = discretePos.x;
+      this.y = discretePos.y;
+    }
+
+    discreteHexPosition(x, y) {
+      let p = { x: x, y: y };
+      return this.vertical
+        ? this.verticalHexPosition(p)
+        : this.horizontalHexPosition(p);
+    }
+
+    verticalHexPosition(p) {
+      [p.y, p.x] = [p.x, p.y];
+      p = this.horizontalHexPosition(p);
+      [p.y, p.x] = [p.x, p.y];
+      return p;
+    }
+
+    horizontalHexPosition(p) {
+      var newP = {};
+      var xIndex = Math.round(p.x / this.step_x);
+      newP.x = xIndex * this.step_x;
+      if (xIndex % 2) {
+        var yIndex = Math.floor(p.y / this.step_y);
+        newP.y = yIndex * this.step_y + this.odd_offset_y;
+      } else {
+        var yIndex = Math.round(p.y / this.step_y);
+        newP.y = yIndex * this.step_y;
+      }
+      //console.log("horizontalHexPosition", p, newP, xIndex, yIndex);
+      return newP;
+    }
+
+    horizontalHexPosition_A(p) {
+      var newP = {};
+      var xIndex = Math.round(p.x / this.step_x);
+      newP.x = xIndex * this.step_x;
+      var quot = p.y / this.step_y;
+      if (xIndex % 2) {
+        var yIndex = Math.round((p.y - this.odd_offset_y) / this.step_y);
+        newP.y = yIndex * this.step_y + this.odd_offset_y;
+      } else {
+        var yIndex = Math.round(p.y / this.step_y);
+        newP.y = yIndex * this.step_y;
+      }
+      return newP;
+    }
+
+    horizontalHexPosition_B(p) {
+      var newP = {};
+      var xIndex = Math.round(p.x / this.step_x);
+      newP.x = xIndex * this.step_x;
+      var quot = p.y / this.step_y;
+      if (xIndex % 2) {
+        var yIndex = Math.round((p.y - this.odd_offset_y) / this.step_y);
+        newP.y = yIndex * this.step_y + this.odd_offset_y;
+      } else {
+        var yIndex = Math.round(p.y / this.step_y);
+        newP.y = yIndex * this.step_y;
+      }
+      return newP;
+    }
+  };
+
+/**
+ * Creates a drag-snap hexagon
  * When dragged, snaps to discrete positions on a hexagon grid
  *
  * @param {*} x - center.x
@@ -399,9 +481,27 @@ export let HexaDragMixin = (superclass) =>
  * @param {*} fillcolor
  * @param {*} strokecolor
  */
-export class DraggableHexagon extends HexaDragMixin(Hexagon) {
+export class DragSnapHexagon extends HexaDragSnapMixin(Hexagon) {
   constructor(x, y, side, vertical, fillcolor, strokecolor) {
-    //console.log("DraggableHexagon", ...arguments);
+    //console.log("DragSnapHexagon", ...arguments);
+    super(...arguments);
+  }
+}
+
+/**
+ * Creates a snapping hexagon
+ * When created, snaps to a discrete position on a hexagon grid
+ *
+ * @param {*} x - center.x
+ * @param {*} y - center.y
+ * @param {*} side  - hexagon side (aka radius)
+ * @param {*} vertical - if true: vertex on top else: side on top
+ * @param {*} fillcolor
+ * @param {*} strokecolor
+ */
+export class SnappingHexagon extends HexaSnapMixin(Hexagon) {
+  constructor(x, y, side, vertical, fillcolor, strokecolor) {
+    //console.log("SnappingHexagon", ...arguments);
     super(...arguments);
   }
 }

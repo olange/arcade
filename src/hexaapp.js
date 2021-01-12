@@ -4,9 +4,10 @@ import {
   Square,
   DraggableSquare,
   HexaGrid,
-  DraggableHexagonCluster,
+  DragSnapHexagonCluster,
   Hexagon,
-  DraggableHexagon,
+  DragSnapHexagon,
+  SnappingHexagon,
 } from "./hexagons.js";
 
 class HexaSprite extends PIXI.Sprite {
@@ -60,10 +61,10 @@ export class HexaApplication extends PIXI.Application {
     );
     this.stage.addChild(verticalGrid);
 
-    let dragHexagons = new DraggableHexagonCluster(true, 0xff5522);
+    let dragHexagons = new DragSnapHexagonCluster(true, 0xff5522);
     this.stage.addChild(dragHexagons);
 
-    let dragHexagons3 = new DraggableHexagonCluster(false, 0x00cc77);
+    let dragHexagons3 = new DragSnapHexagonCluster(false, 0x00cc77);
     this.stage.addChild(dragHexagons3);
 
     // add more objects
@@ -83,15 +84,23 @@ export class HexaApplication extends PIXI.Application {
     // this.stage.addChild(new Hexagon(200, 620, 40, false, 0x0000ff, 0xffffff));
 
     // this.stage.addChild(
-    //   new DraggableHexagon(40, 720, 40, false, 0xff0000, 0xffffff)
+    //   new DragSnapHexagon(40, 720, 40, false, 0xff0000, 0xffffff)
     // );
 
     this.stage.addChild(
-      new DraggableHexagon(120, 720, 40, false, 0x00cc77, 0xffffff)
+      new DragSnapHexagon(120, 720, 40, false, 0x0099ff, 0xffffff)
     );
 
     this.stage.addChild(
-      new DraggableHexagon(200, 720, 40, true, 0xff5522, 0xffffff)
+      new SnappingHexagon(120, 650, 40, false, 0x0099ff, 0xffffff)
+    );
+
+    this.stage.addChild(
+      new DragSnapHexagon(200, 720, 40, true, 0xff00ff, 0xffffff)
+    );
+
+    this.stage.addChild(
+      new SnappingHexagon(280, 720, 40, true, 0xff00ff, 0xffffff)
     );
   }
 }
