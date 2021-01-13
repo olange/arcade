@@ -1,4 +1,4 @@
-# D-Arcade
+# Arcade · Early experiments with SVG, Web Components and Apollo Server
 
 A distributed arcade game engine and app
 & restoration of a Pacman Arcade Cocktail table — Karateco 1984.
