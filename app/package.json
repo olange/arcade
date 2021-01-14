@@ -9,7 +9,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "postinstall": "npm dedupe",
-    "start": "snowpack dev",
+    "start": "snowpack dev --polyfill-node",
     "build": "snowpack build",
     "test": "echo \"This template does not include a test runner by default.\" && exit 1",
     "format": "prettier --write \"src/**/*.js\"",
@@ -20,6 +20,7 @@
     "graphql": "^15.3.0",
     "lit-element": "^2.3.1",
     "lit-html": "^1.2.1",
+    "pixi.js": "^5.3.4",
     "react": "^16.13.1"
   },
   "devDependencies": {
