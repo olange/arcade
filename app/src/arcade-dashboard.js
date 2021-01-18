@@ -3,6 +3,7 @@ import { customElement, property, LitElement, html, css } from 'lit-element';
 import { ArcadeApp } from './arcade-app';
 import { DEditor } from './d-editor';
 import { HackEdit } from './hack-edit';
+import { PixiHello } from './pixi-hello';
 
 import { ButtonSvg } from './button-svg';
 import { openWcLogo } from './open-wc-logo.js';
@@ -115,7 +116,7 @@ export class ArcadeDashboard extends LitElement {
   title = 'D-Arcade';
 
   @property({ type: String })
-  selectedVariant = 'mobilegame';
+  selectedVariant = 'burgericon';
 
   handleButtonHit(e) {
     this.selectedVariant = e.detail;
@@ -132,10 +133,12 @@ export class ArcadeDashboard extends LitElement {
       case 'mobilegame':
         return html`<hack-edit></hack-edit>`;
       case 'burgericon':
-        return html`
-          <h3>Watch this space</h3>
-          <h3>more games coming soon</h3>
-        `;
+        // return html`
+        //   <h3>Watch this space</h3>
+        //   <h3>more games coming soon</h3>
+        // `;
+
+        return html`<pixi-hello id="pixi-hello"></pixi-hello>`;
     }
   }
 
