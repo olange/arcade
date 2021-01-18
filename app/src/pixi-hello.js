@@ -14,6 +14,9 @@ const app = new Application({
   width: aw,
   height: ah,
   backgroundColor: 0x304050,
+  antialias: true,
+  autoDensity: true, // !!!
+  resolution: 2,
 });
 
 // ---------------------------------------------
