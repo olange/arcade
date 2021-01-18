@@ -1,7 +1,7 @@
 import { LitElement, customElement, html, css } from 'lit-element';
 
 import { Application, Graphics } from 'pixi.js';
-import { Square } from './pixi-shapes.js';
+import { Circle, Square } from './pixi-shapes.js';
 
 /*
 import {
@@ -67,26 +67,45 @@ export class PixiApplication extends Application {
       resolution: 2,
     });
 
+    this.renderer.view.style.border = '1px solid #ee0000';
+
+    console.log(
+      'PixiApplication renderer.view w h',
+      this.renderer.view.width,
+      this.renderer.view.height,
+      'resolution:',
+      this.renderer.resolution,
+    );
+    console.log(
+      'PixiApplication screen w h',
+      this.screen.width,
+      this.screen.height,
+    );
     this.addSquares();
+    this.addCircles();
   }
 
   addSquares() {
     const ss = 80;
     this.stage.addChild(new Square(0, 0, ss, null, 0xffffff));
+    this.stage.addChild(new Square(0, this.screen.height, ss, null, 0xffffff));
     this.stage.addChild(
-      new Square(0, this.screen.height - ss, ss, null, 0xffffff),
+      new Square(this.screen.width, this.screen.height, ss, null, 0xffffff),
+    );
+    this.stage.addChild(new Square(this.screen.width, 0, ss, null, 0xffffff));
+  }
+
+  addCircles() {
+    const r = 8;
+    this.stage.addChild(new Circle(0, 0, r, 0xff0000, 0xffffff));
+    this.stage.addChild(
+      new Circle(0, this.screen.height, r, 0xff0000, 0xffffff),
     );
     this.stage.addChild(
-      new Square(
-        this.screen.width - ss,
-        this.screen.height - ss,
-        ss,
-        null,
-        0xffffff,
-      ),
+      new Circle(this.screen.width, this.screen.height, r, 0xff0000, 0xffffff),
     );
     this.stage.addChild(
-      new Square(this.screen.width - ss, 0, ss, null, 0xffffff),
+      new Circle(this.screen.width, 0, r, 0xff0000, 0xffffff),
     );
   }
 

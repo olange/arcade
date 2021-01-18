@@ -75,8 +75,9 @@ export class PixiHello extends LitElement {
       :host {
         background: #fcfcfc;
       }
-      main {
-        margin: 0 2em;
+      * {
+        margin: 0;
+        padding: 0;
       }
       .pixi-hello {
         width: 80vw; /* pct of viewport width */

@@ -16,7 +16,7 @@ export class Circle extends Graphics {
   constructor(x, y, radius, fillcolor, strokecolor) {
     super();
     this.lineStyle(1, strokecolor);
-    this.beginFill(fillcolor, 0.3);
+    this.beginFill(fillcolor, 0.9);
     this.drawCircle(0, 0, radius); // NOT at (x,y)!
     this.endFill();
     this.x = x;
