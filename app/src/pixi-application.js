@@ -2,6 +2,7 @@ import { LitElement, customElement, html, css } from 'lit-element';
 
 import { Application, Graphics } from 'pixi.js';
 import { Circle, Hexagon, Square } from './pixi-shapes.js';
+import { KeyboardHexagon } from './pixi-shapes.js';
 
 /*
 import {
@@ -113,6 +114,9 @@ export class PixiApplication extends Application {
   addHexagons() {
     const side = 40;
     this.stage.addChild(new Hexagon(40, 340, side, true, 0xffaa66, null));
+    this.stage.addChild(
+      new KeyboardHexagon(120, 340, side, true, 0xffaa66, null),
+    );
   }
   /*
       // add HexaSprite

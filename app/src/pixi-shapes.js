@@ -1,5 +1,5 @@
 import { Graphics } from 'pixi.js';
-
+import { HexaKeyboardMixin } from './pixi-interactive.js';
 // -------
 // circles
 // -------
@@ -107,5 +107,12 @@ export class Hexagon extends Graphics {
     }
     this.x = x;
     this.y = y;
+  }
+}
+
+export class KeyboardHexagon extends HexaKeyboardMixin(Hexagon) {
+  constructor(x, y, side, vertical, fillcolor, strokecolor) {
+    console.log('KeyboardHexagon', ...arguments);
+    super(...arguments);
   }
 }
