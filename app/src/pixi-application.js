@@ -1,7 +1,7 @@
 import { LitElement, customElement, html, css } from 'lit-element';
 
 import { Application, Graphics } from 'pixi.js';
-import { Circle, Square } from './pixi-shapes.js';
+import { Circle, Hexagon, Square } from './pixi-shapes.js';
 
 /*
 import {
@@ -83,6 +83,7 @@ export class PixiApplication extends Application {
     );
     this.addSquares();
     this.addCircles();
+    this.addHexagons();
   }
 
   addSquares() {
@@ -109,7 +110,10 @@ export class PixiApplication extends Application {
     );
   }
 
-  //this.renderer.plugins.interaction.moveWhenInside = true; // NBG!
+  addHexagons() {
+    const side = 40;
+    this.stage.addChild(new Hexagon(40, 340, side, true, 0xffaa66, null));
+  }
   /*
       // add HexaSprite
   
