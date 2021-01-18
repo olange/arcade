@@ -1,5 +1,7 @@
 import { LitElement, customElement, html, css } from 'lit-element';
 
+import { PixiApplication } from './pixi-application.js';
+/*
 import { Application, Graphics } from 'pixi.js';
 import {
   makeCircle,
@@ -53,6 +55,15 @@ for (let hexagon of makeHexaGrid(
 )) {
   app.stage.addChild(hexagon);
 }
+*/
+const aw = 800;
+const ah = 600;
+
+const app = new PixiApplication({
+  width: aw,
+  height: ah,
+  backgroundColor: 0x223344,
+});
 
 // ----------------
 //    pixi-hello
