@@ -1,12 +1,23 @@
+import { Hex, OffsetCoord, Point } from './redblobgames-lib-module.js';
+
+/**
+ * Adds movement on a hexgonal grid controlled by keys HZTFVB
+ * For vertical (odd-r) grids
+ *
+ * @param {*} superclass
+ */
 export let HexaKeyboardMixin = (superclass) =>
   class extends superclass {
-    constructor(...rest) {
-      console.log('HexaKeyboardMixin', ...arguments);
-      super(...rest);
+    constructor(col, row, side, vertical, ...rest) {
+      console.log('HexaKeyboardMixin', col, row, side, vertical, ...rest);
+      super(col, row, side, vertical, ...rest);
 
-      // enable interactive mode and hand cursor on hover
-      this.interactive = true;
-      this.buttonMode = true;
+      if (!vertical) {
+        throw 'vertical grid only supported';
+      }
+
+      this.col = col;
+      this.row = row;
 
       this.enablekeyboardEvents();
     }
@@ -21,8 +32,8 @@ export let HexaKeyboardMixin = (superclass) =>
       //console.log('HexaKeyboardMixin.onKeyDown', key.code);
 
       const code = key.code;
-      // 6 keys around "KeyG"
-      const codesHandled = ['KeyF', 'KeyT', 'KeyY', 'KeyH', 'KeyB', 'KeyV'];
+      // 6 keys around "KeyG", per US layout
+      const codesHandled = ['KeyH', 'KeyY', 'KeyT', 'KeyF', 'KeyV', 'KeyB'];
 
       if (codesHandled.includes(code)) {
         if (key.cancelable) {
@@ -31,6 +42,22 @@ export let HexaKeyboardMixin = (superclass) =>
         }
 
         console.log('HexaKeyboardMixin.onKeyDown', key.code);
+
+        let current = new OffsetCoord(this.col, this.row);
+        let cube = OffsetCoord.roffsetToCube(-1, current);
+        let direction = codesHandled.indexOf(code);
+        let neighbor = cube.neighbor(direction);
+        let next = OffsetCoord.roffsetFromCube(-1, neighbor);
+
+        this.setDiscreteHexPosition(next.col, next.row);
+
+        console.log(
+          'HexaKeyboardMixin.onKeyDown',
+          key.code,
+          direction,
+          next.col,
+          next.row,
+        );
       }
     }
 

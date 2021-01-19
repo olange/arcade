@@ -1,5 +1,6 @@
 import { Graphics } from 'pixi.js';
 import { HexaKeyboardMixin } from './pixi-interactive.js';
+
 // -------
 // circles
 // -------
@@ -58,8 +59,8 @@ export class Square extends Graphics {
 /**
  * Creates a hexagon (vertical or horizontal)
  *
- * @param {*} x     - center-x
- * @param {*} y     - center-y
+ * @param {*} col
+ * @param {*} row
  * @param {*} side  - hexagon side (aka radius)
  * @param {*} vertical - if true: vertex on top else: side on top
  * @param {*} fillcolor
@@ -67,7 +68,7 @@ export class Square extends Graphics {
  */
 export class Hexagon extends Graphics {
   constructor(x, y, side, vertical, fillcolor, strokecolor) {
-    //console.log("Hexagon", ...arguments);
+    console.log('Hexagon', ...arguments);
     super();
 
     this.vertical = vertical;
@@ -110,9 +111,79 @@ export class Hexagon extends Graphics {
   }
 }
 
-export class KeyboardHexagon extends HexaKeyboardMixin(Hexagon) {
-  constructor(x, y, side, vertical, fillcolor, strokecolor) {
-    console.log('KeyboardHexagon', ...arguments);
+/**
+ * Adds hexgonal (col,row)->(x,y) conversion to the superclass
+ *
+ * @param {*} superclass
+ */
+export let HexaCR2XYMixin = (superclass) =>
+  class extends superclass {
+    constructor(col, row, side, vertical, ...rest) {
+      console.log('HexaRC2XYMixin', col, row, side, vertical, ...rest);
+      super(col, row, side, vertical, ...rest);
+
+      // horizontal
+      this.step_x = side * 1.5;
+      this.step_y = side * Math.sqrt(3);
+      this.odd_offset_x = 0;
+      this.odd_offset_y = this.step_y / 2;
+
+      this.setDiscreteHexPosition(col, row);
+    }
+
+    incrementDiscreteHexPosition(col, row) {
+      console.log('incrementDiscreteHexPosition', col, row);
+      this.setDiscreteHexPosition(this.col + col, this.row + row);
+    }
+
+    setDiscreteHexPosition(col, row) {
+      console.log('setDiscreteHexPosition', col, row);
+      this.col = col;
+      this.row = row;
+      let discretePos = this.vertical
+        ? this.verticalHexPosition(col, row)
+        : this.horizontalHexPosition(col, row);
+      this.x = discretePos.x;
+      this.y = discretePos.y;
+    }
+
+    verticalHexPosition(col, row) {
+      [row, col] = [col, row];
+      let p = this.horizontalHexPosition(col, row);
+      [p.y, p.x] = [p.x, p.y];
+      return p;
+    }
+
+    horizontalHexPosition(col, row) {
+      var p = {};
+      p.x = col * this.step_x;
+      p.y = row * this.step_y;
+      if (col % 2) {
+        p.y += this.odd_offset_y;
+      }
+      //console.log("horizontalHexPosition", p, newP, col, row);
+      return p;
+    }
+  };
+
+/**
+ * creates a Hexagon placed at (col, row) on a hexa grid
+ */
+export class HexagonCR extends HexaCR2XYMixin(Hexagon) {
+  constructor(col, row, side, vertical, fillcolor, strokecolor) {
+    console.log('HexagonCR', ...arguments);
+    super(...arguments);
+  }
+}
+
+/**
+ * Creates a Hexagon placed at (col, row) on a hexa grid and steered by keys HZTFVB
+ */
+export class HexagonCRKeyboard extends HexaKeyboardMixin(
+  HexaCR2XYMixin(Hexagon),
+) {
+  constructor(col, row, side, vertical, fillcolor, strokecolor) {
+    console.log('HexagonCRKeyboard', ...arguments);
     super(...arguments);
   }
 }
