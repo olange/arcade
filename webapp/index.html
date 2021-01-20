@@ -15,7 +15,7 @@
   <body>
     <header>
       <nav>Gōng-fu I/O practice</nav>
-      <h1>d-Arcade</h1>
+      <h1>d-arcade</h1>
     </header>
     <main>
       <p>A distributed arcade game, mashup of a few delighful arcade games
@@ -23,7 +23,8 @@
     </main>
     <footer>
       <p>Join our friendly <a href="https://github.com/gongfuio/sessions">hack sessions</a>,
-        learn coding and help craft the game <span id="load">🔥 Firebase loading&hellip;</span></p>
+        learn coding and help craft the game 🐲 <a href="https://github.com/olange/arcade">
+        Source code</a> is available on GitHub 🔥 <span id="load">Firebase loading&hellip;</span></p>
     </footer>
 
     <script type="module">
@@ -48,7 +49,7 @@
           let features = [
             'auth', 'database', 'messaging', 'storage', 'analytics', 'remoteConfig', 'performance',
           ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `🔥 Firebase loaded with ${features.join(', ')}.`;
+          loadEl.textContent = `Firebase loaded with ${features.join(', ')}.`;
         } catch (e) {
           console.error(e);
           loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
