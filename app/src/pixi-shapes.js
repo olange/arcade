@@ -59,9 +59,9 @@ export class Square extends Graphics {
 /**
  * Creates a hexagon (vertical or horizontal)
  *
- * @param {*} col
- * @param {*} row
- * @param {*} side  - hexagon side (aka radius)
+ * @param {*} x     - center.x, pixels
+ * @param {*} y     - center.y, pixels
+ * @param {*} side  - hexagon side (aka radius), pixels
  * @param {*} vertical - if true: vertex on top else: side on top
  * @param {*} fillcolor
  * @param {*} strokecolor
@@ -119,7 +119,7 @@ export class Hexagon extends Graphics {
 export let HexaCR2XYMixin = (superclass) =>
   class extends superclass {
     constructor(col, row, side, vertical, ...rest) {
-      console.log('HexaRC2XYMixin', col, row, side, vertical, ...rest);
+      console.log('HexaCR2XYMixin', col, row, side, vertical, ...rest);
       super(col, row, side, vertical, ...rest);
 
       // horizontal
