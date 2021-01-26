@@ -1,0 +1,38 @@
+{
+  "name": "@gongfuio/arcade",
+  "version": "0.1.0",
+  "description": "A distributed arcade game",
+  "author": "Olivier Lange",
+  "contributors": [
+    "Rudi Farkas"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "arcade",
+    "game",
+    "hexagrid"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "postinstall": "npm dedupe && run-s install:*",
+    "install:webapp": "npm --prefix webapp install",
+    "start": "run-p start:*",
+    "start:webapp": "npm --prefix webapp run start",
+    "build": "run-s build:*",
+    "build:webapp": "npm --prefix webapp run build",
+    "deploy": "firebase deploy --only hosting"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
+  "homepage": "https://github.com/olange/arcade#readme",
+  "bugs": {
+    "url": "https://github.com/olange/arcade/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olange/arcade.git"
+  }
+}

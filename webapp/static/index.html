@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>d-arcade</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="/styles.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Sans:wght@700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <nav>Gōng-fu I/O practice</nav>
+      <h1>d-arcade</h1>
+    </header>
+    <main>
+      <p>
+        A distributed arcade game, mashup of a few delightful arcade games
+        from the eighties, retrofitted to <a href="https://www.redblobgames.com/grids/hexagons/"
+        >hexagonal grids</a>.
+      </p>
+    </main>
+    <footer>
+      <p>
+        Join our friendly
+        <a href="https://github.com/gongfuio/sessions">hack sessions</a>,
+        learn coding and help craft the game
+        🐲&nbsp;<a href="https://github.com/olange/arcade">Source code</a>
+        is available on GitHub
+        🔥&nbsp;<span id="load">Firebase loading&hellip;</span>
+      </p>
+    </footer>
+
+    <script type="module">
+      import firebase from 'firebase/app';
+      // import 'firebase/analytics';
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const firebaseConfig = {
+          apiKey: 'AIzaSyCLD_o2cXpHdZ_LTr-3toJL-dSdYjy4d4w',
+          authDomain: 'd-arcade.firebaseapp.com',
+          projectId: 'd-arcade',
+          storageBucket: 'd-arcade.appspot.com',
+          messagingSenderId: '186903347792',
+          appId: '1:186903347792:web:58b0d6bb9e736453740755',
+          measurementId: 'G-CWJDMWW5JT',
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        // firebase.analytics();
+
+        const loadEl = document.querySelector('#load');
+        try {
+          let features = [
+            'auth', 'database', 'messaging', 'storage', 'analytics',
+            'remoteConfig', 'performance',
+          ].filter((feature) => typeof app[feature] === 'function');
+          loadEl.textContent = features.length
+            ? `Firebase loaded with ${features.join(', ')}.`
+            : 'Firebase loaded.';
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+  </body>
+</html>

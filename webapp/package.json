@@ -1,0 +1,42 @@
+{
+  "name": "@gongfuio/arcade-webapp",
+  "version": "0.1.0",
+  "description": "A distributed arcade game · Web app",
+  "author": "Olivier Lange",
+  "contributors": [
+    "Rudi Farkas"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "arcade",
+    "game",
+    "hexagrid"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "postinstall": "npm dedupe",
+    "build": "snowpack build",
+    "start": "snowpack dev",
+    "format": "prettier --write \"components/**/*.js\"",
+    "lint": "prettier --check \"components/**/*.js\"",
+    "test": "echo \"This package does not include a test runner.\" && exit 1"
+  },
+  "dependencies": {
+    "firebase": "^8.2.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "snowpack": "^3.0.1"
+  },
+  "homepage": "https://github.com/olange/arcade#readme",
+  "bugs": {
+    "url": "https://github.com/olange/arcade/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olange/arcade.git",
+    "directory": "webapp"
+  }
+}
