@@ -33,6 +33,9 @@
     "prettier": "^2.2.1",
     "snowpack": "^3.0.11"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "homepage": "https://github.com/olange/arcade#readme",
   "bugs": {
     "url": "https://github.com/olange/arcade/issues"
