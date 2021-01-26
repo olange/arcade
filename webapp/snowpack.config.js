@@ -10,6 +10,6 @@ module.exports = {
   plugins: [ '@snowpack/plugin-babel' ],
   packageOptions: { },
   devOptions: { output: "stream" },
-  buildOptions: { },
+  buildOptions: { sourcemap: true },
   optimize: { }
 };
