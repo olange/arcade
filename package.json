@@ -18,8 +18,9 @@
   "scripts": {
     "postinstall": "npm dedupe && run-s install:*",
     "install:webapp": "npm --prefix webapp install",
-    "start": "run-p start:*",
+    "start": "run-p start:webapp",
     "start:webapp": "npm --prefix webapp run start",
+    "start:firebase": "firebase serve --only hosting",
     "build": "run-s build:*",
     "build:webapp": "npm --prefix webapp run build",
     "deploy": "firebase deploy --only hosting"
