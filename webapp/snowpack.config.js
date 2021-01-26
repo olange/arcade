@@ -7,7 +7,7 @@ module.exports = {
     static: { url: "/", static: true },
     // components: { url: "/components" }
   },
-  plugins: [ ],
+  plugins: [ '@snowpack/plugin-babel' ],
   packageOptions: { },
   devOptions: { output: "stream" },
   buildOptions: { },

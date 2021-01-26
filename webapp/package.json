@@ -27,8 +27,11 @@
     "firebase": "^8.2.4"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-decorators": "^7.12.12",
+    "@snowpack/plugin-babel": "^2.1.6",
     "prettier": "^2.2.1",
-    "snowpack": "^3.0.1"
+    "snowpack": "^3.0.11"
   },
   "homepage": "https://github.com/olange/arcade#readme",
   "bugs": {
