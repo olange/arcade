@@ -8,8 +8,8 @@ module.exports = {
     components: { url: "/components" }
   },
   plugins: [ '@snowpack/plugin-babel' ],
-  packageOptions: { },
+  packageOptions: { polyfillNode: true },
   devOptions: { output: "stream" },
   buildOptions: { out: "build", sourcemap: true },
-  optimize: { }
+  optimize: { minify: true, treeshake: true }
 };
