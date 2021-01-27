@@ -5,7 +5,7 @@
 module.exports = {
   mount: {
     static: { url: "/", static: true },
-    // components: { url: "/components" }
+    components: { url: "/components" }
   },
   plugins: [ '@snowpack/plugin-babel' ],
   packageOptions: { },

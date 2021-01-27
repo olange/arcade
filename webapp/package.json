@@ -24,7 +24,8 @@
     "test": "echo \"This package does not include a test runner.\" && exit 1"
   },
   "dependencies": {
-    "firebase": "^8.2.4"
+    "firebase": "^8.2.4",
+    "lit-element": "^2.4.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.12.1",
