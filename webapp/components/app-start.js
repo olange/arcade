@@ -3,7 +3,7 @@ import { customElement, property } from 'lit-element';
 
 @customElement('app-start')
 export class AppStart extends LitElement {
-  @property() href;
+  @property({type: String}) href;
 
   static get styles() {
     return css`
@@ -12,7 +12,8 @@ export class AppStart extends LitElement {
           margin: 36px 0 18px; }
       .link {
         color: white; background-color: #1262b3;
-        padding: 18px 36px; text-decoration: none; }
+        padding: 18px 36px; text-decoration: none;
+        border-radius: 9px; }
     `;
   }
 
