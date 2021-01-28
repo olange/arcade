@@ -9,7 +9,7 @@ module.exports = {
   },
   plugins: [ '@snowpack/plugin-babel' ],
   packageOptions: { polyfillNode: true },
-  devOptions: { output: "stream" },
-  buildOptions: { out: "build", sourcemap: true },
+  devOptions: { output: "stream" }, // add `secure: true` for HTTPS
+  buildOptions: { out: "build", metaUrlPath: "web_modules", sourcemap: true },
   optimize: { minify: true, treeshake: true }
 };
