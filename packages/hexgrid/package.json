@@ -1,9 +1,10 @@
 {
-  "name": "@gongfuio/arcade-webapp",
+  "name": "@gongfuio/hexgrid",
   "version": "0.1.0",
-  "description": "A distributed arcade game · Web app",
-  "author": "Olivier Lange",
+  "description": "‹Hexgrid› implementation from Red Blob Games (https://www.redblobgames.com/grids/hexagons/implementation.html) packaged as an ES module",
+  "author": "Amit Patel",
   "contributors": [
+    "Olivier Lange",
     "Rudi Farkas"
   ],
   "license": "Apache-2.0",
@@ -12,33 +13,22 @@
     "game",
     "hexagrid"
   ],
+  "module": "dist/index.js",
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "scripts": {
     "postinstall": "npm dedupe",
+    "prepare": "npm run build",
     "build": "snowpack build",
-    "start": "snowpack dev",
-    "format": "prettier --write \"components/**/*.js\"",
-    "lint": "prettier --check \"components/**/*.js\"",
+    "format": "prettier --write \"src/**/*.js\"",
+    "lint": "prettier --check \"src/**/*.js\"",
     "test": "echo \"This package does not include a test runner.\" && exit 1"
   },
-  "dependencies": {
-    "@gongfuio/hexgrid": "^0.1.0",
-    "firebase": "^8.2.4",
-    "lit-element": "^2.4.0",
-    "pixi.js": "^5.3.7"
-  },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-decorators": "^7.13.5",
-    "@snowpack/plugin-babel": "^2.1.6",
     "prettier": "^2.2.1",
     "snowpack": "^3.0.13"
   },
-  "workspaces": [
-    "../packages/*"
-  ],
   "engines": {
     "node": ">=14"
   },
@@ -49,6 +39,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/olange/arcade.git",
-    "directory": "webapp"
+    "directory": "packages/hexgrid"
   }
 }

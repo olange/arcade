@@ -1,2 +1,5 @@
-.build
-build
+components/
+static/
+.prettierrc
+babel.config.json
+snowpack.config.js

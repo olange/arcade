@@ -1,11 +1,12 @@
 import { LitElement, html, css } from 'lit-element';
 import { customElement, internalProperty, query } from 'lit-element';
-import * as PIXI from 'pixi.js'
+import * as PIXI from 'pixi.js';
 
 @customElement('app-game')
 export class AppGame extends LitElement {
 
-  @internalProperty({type: Object}) app;
+  @internalProperty({type: Object})
+  app;
 
   @internalProperty({type: Object})
   static pixiAppOptions = {
@@ -15,7 +16,8 @@ export class AppGame extends LitElement {
     resolution: 2,
   }
 
-  @query('div#container') containerEl;
+  @query('div#container')
+  containerEl;
 
   static get styles() {
     return css`
