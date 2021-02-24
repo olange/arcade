@@ -1,7 +1,7 @@
 {
   "hosting": {
     "public": "webapp/build",
-    "predeploy": "npm run build:webapp",
+    "predeploy": "node_modules/.bin/run-s build:packages:* build:webapp",
     "ignore": [
       "firebase.json",
       "**/.*",
