@@ -21,7 +21,8 @@
     "start": "run-p start:webapp",
     "start:webapp": "npm --prefix webapp run start",
     "start:firebase": "firebase serve --only hosting",
-    "build": "run-s build:*",
+    "build": "run-s build:packages:* build:*",
+    "build:packages:hexgrid": "npm --prefix packages/hexgrid run build",
     "build:webapp": "npm --prefix webapp run build",
     "deploy": "firebase deploy --only hosting"
   },
