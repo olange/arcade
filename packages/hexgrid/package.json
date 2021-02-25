@@ -22,7 +22,8 @@
     "prepare": "npm run build",
     "build": "snowpack build",
     "format": "prettier --write \"src/**/*.js\"",
-    "lint": "prettier --check \"src/**/*.js\"",
+    "format:check": "prettier --check \"src/**/*.js\"",
+    "lint": "(cd ../.. && npx eslint packages/hexgrid)",
     "test": "echo \"This package does not include a test runner.\" && exit 1"
   },
   "devDependencies": {

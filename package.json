@@ -21,12 +21,21 @@
     "start": "run-p start:webapp",
     "start:webapp": "npm --prefix webapp run start",
     "start:firebase": "firebase serve --only hosting",
+    "lint": "npx eslint .",
+    "lint:packages:hexgrid": "npx eslint packages/hexgrid",
+    "lint:webapp": "npx eslint webapp",
+    "format": "run-s format:**",
+    "format:packages:hexgrid": "npm --prefix packages/hexgrid run format",
+    "format:webapp": "npm --prefix webapp run format",
     "build": "run-s build:packages:* build:*",
     "build:packages:hexgrid": "npm --prefix packages/hexgrid run build",
     "build:webapp": "npm --prefix webapp run build",
     "deploy": "firebase deploy --only hosting"
   },
   "devDependencies": {
+    "@babel/core": "^7.13.1",
+    "@babel/eslint-parser": "^7.13.4",
+    "eslint": "^7.20.0",
     "npm-run-all": "^4.1.5"
   },
   "engines": {

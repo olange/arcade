@@ -20,7 +20,8 @@
     "build": "snowpack build",
     "start": "snowpack dev",
     "format": "prettier --write \"components/**/*.js\"",
-    "lint": "prettier --check \"components/**/*.js\"",
+    "format:check": "prettier --check \"components/**/*.js\"",
+    "lint": "(cd .. && npx eslint webapp)",
     "test": "echo \"This package does not include a test runner.\" && exit 1"
   },
   "dependencies": {
