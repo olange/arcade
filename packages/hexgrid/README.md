@@ -2,15 +2,24 @@
 
 ‹Hexgrid› implementation from [Red Blob Games](https://www.redblobgames.com/grids/hexagons/implementation.html), packaged as an ES module.
 
-## Install
-
-`npm install`
-
 ## Build
 
-`npm run build`
+```bash
+$ cd packages/hexgrid
+$ npm install
+$ npm run build
+```
 
 ## Usage
+
+Install in your project:
+
+```bash
+$ cd webapp
+$ npm install --save @gongfuio/hexgrid
+```
+
+Use from a module:
 
 ```javascript
 import { Layout } from '@gongfuio/hexgrid';
