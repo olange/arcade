@@ -1,0 +1,24 @@
+{
+  "name": "@gongfuio/prettierrc",
+  "version": "1.0.0",
+  "description": "D-Arcade shared Prettier configuration",
+  "main": "prettierrc.json",
+  "author": "Olivier Lange <olange@petit-atelier.ch>",
+  "license": "Apache-2.0",
+  "keywords": [
+    "prettier",
+    "configuration"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/olange/arcade#readme",
+  "bugs": {
+    "url": "https://github.com/olange/arcade/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olange/arcade.git",
+    "directory": "packages/prettierrc"
+  }
+}

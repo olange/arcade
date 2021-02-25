@@ -1,4 +1,4 @@
-# Hexgrid
+# `@gongfuio/hexgrid` package
 
 ‹Hexgrid› implementation from [Red Blob Games](https://www.redblobgames.com/grids/hexagons/implementation.html), packaged as an ES module.
 
