@@ -26,7 +26,7 @@
         from the eighties, retrofitted to <a href="https://www.redblobgames.com/grids/hexagons/"
         >hexagonal grids</a>.
       </p>
-      <app-start href="game.html">Ready?</app-start>
+      <app-start href="game.html">Select your preferred game</app-start>
     </main>
     <footer>
       <p>
@@ -41,9 +41,9 @@
 
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script type="module">
-      import './components/app-start.js';
       import firebase from 'firebase/app';
-      // import 'firebase/analytics';
+      import 'firebase/firestore';
+      import './components/app-start.js';
 
       document.addEventListener('DOMContentLoaded', function () {
         const firebaseConfig = {
@@ -57,12 +57,12 @@
         };
 
         const app = firebase.initializeApp(firebaseConfig);
-        // firebase.analytics();
+        console.log( app);
 
         const loadEl = document.querySelector('#load');
         try {
           let features = [
-            'auth', 'database', 'messaging', 'storage', 'analytics',
+            'auth', 'firestore', 'messaging', 'storage', 'analytics',
             'remoteConfig', 'performance',
           ].filter((feature) => typeof app[feature] === 'function');
           loadEl.textContent = features.length
