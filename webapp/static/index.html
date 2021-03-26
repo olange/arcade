@@ -57,7 +57,7 @@
         };
 
         const app = firebase.initializeApp(firebaseConfig);
-        console.log( app);
+        console.log("app=", app);
 
         const loadEl = document.querySelector('#load');
         try {
@@ -68,6 +68,8 @@
           loadEl.textContent = features.length
             ? `Firebase loaded with ${features.join(', ')}.`
             : 'Firebase loaded.';
+          const timestamp = () => `[${new Date().toISOString()}]`
+          console.log(timestamp(), loadEl.textContent)
         } catch (e) {
           console.error(e);
           loadEl.textContent = 'Error loading the Firebase SDK, check the console.';

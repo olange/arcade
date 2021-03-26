@@ -32,21 +32,28 @@ export class AppStart extends LitElement {
     this._data = undefined;
   }
 
-  async firstUpdated() {
+  firstUpdated() {
+    const timestamp = () => `[${new Date().toISOString()}]`
+    console.log(timestamp(), "AppStart.firstUpdated")
     if( !this._data) {
       this._data = {};
-      await this.fetchData();
+      this.fetchData();
     }
   }
 
   async fetchData() {
-    this.loading = true;
-    const querySnapshot = await firebase.firestore().collection("games").get();
-    querySnapshot.forEach(( doc) => {
+   if (firebase.apps.length > 0) {
+      this.loading = true;
+      const querySnapshot = await firebase.firestore().collection("games").get();
+      querySnapshot.forEach(( doc) => {
       console.log( `firestore › games › doc( ${doc.id}) => { name: ${doc.data().name} }`);
-      this._data[ doc.id] = doc.data();
-    });
-    this.loading = false;
+        this._data[ doc.id] = doc.data();
+      });
+      this.loading = false;
+    } else {
+      console.log("fetchData", "*** firebase not yet initialized");
+      setTimeout(() => { this.fetchData() }, 1);
+    }
   }
 
   render() {
