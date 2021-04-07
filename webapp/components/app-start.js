@@ -33,27 +33,34 @@ export class AppStart extends LitElement {
   }
 
   firstUpdated() {
-    const timestamp = () => `[${new Date().toISOString()}]`
-    console.log(timestamp(), "AppStart.firstUpdated")
+    console.log( "app-start › firstUpdated() called.");
     if( !this._data) {
       this._data = {};
-      this.fetchData();
+      // NOTE: fetchData() is actually a promise, not a synchronous callback
+      this.retryUntilFirebaseAvailable( this.fetchData);
+    }
+  }
+
+  retryUntilFirebaseAvailable( callback) {
+    console.log( "app-start › retryUntilFirebaseAvailable() called.");
+    if( firebase.apps.length === 0) {
+      console.log( 'app-start › retryUntilFirebaseAvailable() › Firebase not yet initialized, retrying fetching in 100ms…');
+      setTimeout(() => { this.retryUntilFirebaseAvailable( callback); }, 100);
+    } else {
+      // fire & forget, that is, don't await the callback, if it was async;
+      // it will trigger re-rendering, by changing the `loading` property
+      callback.call( this);
     }
   }
 
   async fetchData() {
-   if (firebase.apps.length > 0) {
-      this.loading = true;
-      const querySnapshot = await firebase.firestore().collection("games").get();
-      querySnapshot.forEach(( doc) => {
-      console.log( `firestore › games › doc( ${doc.id}) => { name: ${doc.data().name} }`);
-        this._data[ doc.id] = doc.data();
-      });
-      this.loading = false;
-    } else {
-      console.log("fetchData", "*** firebase not yet initialized");
-      setTimeout(() => { this.fetchData() }, 1);
-    }
+    console.log( "app-start › fetchData() called.");
+    const querySnapshot = await firebase.firestore().collection("games").get();
+    querySnapshot.forEach(( doc) => {
+      this._data[ doc.id] = doc.data();
+    });
+    console.log( 'app-start › fetchData() › firestore().collection("games").get()', this._data);
+    this.loading = false;
   }
 
   render() {

@@ -56,8 +56,9 @@
           measurementId: 'G-CWJDMWW5JT',
         };
 
+        firebase.registerVersion( "webapp", "0.1.0");
         const app = firebase.initializeApp(firebaseConfig);
-        console.log("app=", app);
+        console.log( 'index › firebase.initializeApp()', app);
 
         const loadEl = document.querySelector('#load');
         try {
@@ -65,11 +66,11 @@
             'auth', 'firestore', 'messaging', 'storage', 'analytics',
             'remoteConfig', 'performance',
           ].filter((feature) => typeof app[feature] === 'function');
-          loadEl.textContent = features.length
+          const featuresRepr = features.length
             ? `Firebase loaded with ${features.join(', ')}.`
             : 'Firebase loaded.';
-          const timestamp = () => `[${new Date().toISOString()}]`
-          console.log(timestamp(), loadEl.textContent)
+          loadEl.textContent = featuresRepr;
+          console.log( `index › DOMContentLoaded › ${featuresRepr}`)
         } catch (e) {
           console.error(e);
           loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
