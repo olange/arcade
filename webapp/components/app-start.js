@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import { customElement, internalProperty, property } from 'lit-element';
 import firebase from 'firebase/app';
+import { GameSelector } from './game-selector';
 
 @customElement('app-start')
 export class AppStart extends LitElement {
@@ -62,13 +63,21 @@ export class AppStart extends LitElement {
     console.log( 'app-start › fetchData() › firestore().collection("games").get()', this._data);
     this.loading = false;
   }
+ 
+  handleSelected(e) {
+    console.log('handleSelected', e.detail);
+    alert('selected: ' + e.detail);
+  }
 
   render() {
     if( this.loading) {
       return html`<a class="link unresolved">Loading available games…</a>`
     }
+ 
+    let gameNames = Object.entries(this._data).map(([ gameId, gameObj]) => gameObj.name);
 
-    return Object.entries( this._data).map(([ gameId, gameObj]) =>
-      html`<a class="link" href="${this.href}#${gameId}">${gameObj.name}</a> `)
+    console.log("AppStart.render gameNames", gameNames, JSON.stringify(gameNames));
+
+    return html`<game-selector games=${JSON.stringify(gameNames)} @selected="${this.handleSelected}"></game-selector>`;
   }
 }
