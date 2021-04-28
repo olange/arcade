@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit-element';
 import { customElement, internalProperty, property } from 'lit-element';
 import firebase from 'firebase/app';
-import { GameSelector } from './game-selector';
+import { GameButton } from './game-button';
 
 @customElement('app-start')
 export class AppStart extends LitElement {
@@ -12,17 +12,21 @@ export class AppStart extends LitElement {
     return css`
       :host {
         display: inline-block;
-        margin: 36px 0 18px;
+        margin-bottom: -0.5em;
       }
       .link {
         color: white;
-        background-color: #1262b3;
-        padding: 18px 36px;
+        background-color: var(--color-theme-primary, #1262b3);
+        padding: 0.5rem 1rem;
         text-decoration: none;
-        border-radius: 9px;
+        border-radius: 0.5rem;
       }
       .unresolved {
-        background-color: #dedede;
+        background-color: var(--color-text-tertiary, rgba(0,0,0,0.1));
+      }
+      game-button {
+        margin-right: 0.5rem;
+        margin-bottom: 1rem;
       }
     `;
   }
@@ -63,7 +67,7 @@ export class AppStart extends LitElement {
     console.log( 'app-start › fetchData() › firestore().collection("games").get()', this._data);
     this.loading = false;
   }
- 
+
   handleSelected(e) {
     console.log('handleSelected', e.detail);
     alert('selected: ' + e.detail);
@@ -73,11 +77,14 @@ export class AppStart extends LitElement {
     if( this.loading) {
       return html`<a class="link unresolved">Loading available games…</a>`
     }
- 
-    let gameNames = Object.entries(this._data).map(([ gameId, gameObj]) => gameObj.name);
 
-    console.log("AppStart.render gameNames", gameNames, JSON.stringify(gameNames));
-
-    return html`<game-selector games=${JSON.stringify(gameNames)} @selected="${this.handleSelected}"></game-selector>`;
+    return html`
+      <slot></slot>
+      ${Object.entries(this._data).map(([ gameId, gameObj]) => html`
+        <game-button name="${gameId}" @selected="${this.handleSelected}">
+          ${gameObj.name}
+        </game-button>
+      `)}
+    `;
   }
 }
