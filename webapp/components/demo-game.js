@@ -2,8 +2,8 @@ import { LitElement, html, css } from 'lit-element';
 import { customElement, internalProperty, query } from 'lit-element';
 import * as PIXI from 'pixi.js';
 
-@customElement('app-game')
-export class AppGame extends LitElement {
+@customElement('demo-game')
+export class DemoGame extends LitElement {
   @internalProperty({ type: Object })
   app;
 
@@ -44,7 +44,7 @@ export class AppGame extends LitElement {
       height: clientHeight,
     };
     console.log(
-      `AppGame › new Pixi.Application( ${clientWidth}x${clientHeight}px)`,
+      `DemoGame › new Pixi.Application( ${clientWidth}x${clientHeight}px)`,
     );
     this.app = new PIXI.Application(options);
     this.containerEl.appendChild(this.app.view);
@@ -57,7 +57,7 @@ export class AppGame extends LitElement {
         circle.y = clientHeight / 2;
         circle.anchor.x = 0.5;
         circle.anchor.y = 0.5;
-        console.log(`AppGame › makeCircle()`, circle);
+        console.log(`DemoGame › makeCircle()`, circle);
         this.app.stage.addChild(circle);
         this.app.ticker.add(() => {
           circle.rotation += 0.01;

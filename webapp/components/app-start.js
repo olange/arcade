@@ -2,11 +2,13 @@ import { LitElement, html, css } from 'lit-element';
 import { customElement, internalProperty, property } from 'lit-element';
 import firebase from 'firebase/app';
 import { GameButton } from './game-button';
+import { DemoGame } from './demo-game';
 
 @customElement('app-start')
 export class AppStart extends LitElement {
   @property({ type: String }) href;
   @internalProperty({ type: Boolean }) loading;
+  @internalProperty({ type: String }) selectedGameId;
 
   static get styles() {
     return css`
@@ -35,6 +37,7 @@ export class AppStart extends LitElement {
     super();
     this.loading = true;
     this._data = undefined;
+    this.selectedGameId = null;
   }
 
   firstUpdated() {
@@ -64,13 +67,16 @@ export class AppStart extends LitElement {
     querySnapshot.forEach(( doc) => {
       this._data[ doc.id] = doc.data();
     });
+    // simulate another game list element
+    this._data['demoGame'] = { 'name': 'Demo Game' };
     console.log( 'app-start › fetchData() › firestore().collection("games").get()', this._data);
     this.loading = false;
   }
 
   handleSelected(e) {
     console.log('handleSelected', e.detail);
-    alert('selected: ' + e.detail);
+    //alert('selected: ' + e.detail);
+    this.selectedGameId = e.detail;
   }
 
   render() {
@@ -84,7 +90,8 @@ export class AppStart extends LitElement {
         <game-button name="${gameId}" @selected="${this.handleSelected}">
           ${gameObj.name}
         </game-button>
-      `)}
+      `)};   
+      ${this.selectedGameId == 'demoGame' ? html`<demo-game></demo-game>` : html``}
     `;
   }
 }
