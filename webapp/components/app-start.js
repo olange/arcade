@@ -90,7 +90,7 @@ export class AppStart extends LitElement {
         <game-button name="${gameId}" @selected="${this.handleSelected}">
           ${gameObj.name}
         </game-button>
-      `)};   
+      `)}
       ${this.selectedGameId == 'demoGame' ? html`<demo-game></demo-game>` : html``}
     `;
   }
