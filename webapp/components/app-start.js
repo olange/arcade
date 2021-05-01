@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit-element';
 import { customElement, internalProperty, property } from 'lit-element';
 import firebase from 'firebase/app';
 import { GameButton } from './game-button';
-import { DemoGame } from './demo-game';
+import { DemoGame } from './games/demo-game/demo-game';
 
 @customElement('app-start')
 export class AppStart extends LitElement {
