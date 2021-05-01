@@ -3,6 +3,7 @@ import { customElement, internalProperty, property } from 'lit-element';
 import firebase from 'firebase/app';
 import { GameButton } from './game-button';
 import { DemoGame } from './games/demo-game/demo-game';
+import { HexaGame } from './games/hexa-game/hexa-game';
 
 @customElement('app-start')
 export class AppStart extends LitElement {
@@ -67,8 +68,11 @@ export class AppStart extends LitElement {
     querySnapshot.forEach(( doc) => {
       this._data[ doc.id] = doc.data();
     });
-    // simulate another game list element
+
+    // simulate more game list elements
     this._data['demoGame'] = { 'name': 'Demo Game' };
+    this._data['hexaGame'] = { 'name': 'Hexa Game' };
+
     console.log( 'app-start › fetchData() › firestore().collection("games").get()', this._data);
     this.loading = false;
   }
@@ -77,6 +81,17 @@ export class AppStart extends LitElement {
     console.log('handleSelected', e.detail);
     //alert('selected: ' + e.detail);
     this.selectedGameId = e.detail;
+  }
+
+  renderSelected() {
+    switch(this.selectedGameId) {
+        case 'demoGame':
+            return html`<demo-game></demo-game>`;
+        case 'hexaGame':
+            return html`<hexa-game></hexa-game>`;
+        default:
+            return html``;
+      }
   }
 
   render() {
@@ -91,7 +106,9 @@ export class AppStart extends LitElement {
           ${gameObj.name}
         </game-button>
       `)}
-      ${this.selectedGameId == 'demoGame' ? html`<demo-game></demo-game>` : html``}
+      ${this.renderSelected()}
     `;
   }
 }
+
+//${this.selectedGameId == 'demoGame' ? html`<demo-game></demo-game>` : html``}
