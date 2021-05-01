@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 
 import { RotatingSprite } from './sprites.js';
-import { CircleButton, TextButton } from './buttons.js';
+import { CircleButton, TextButton, Text } from './buttons.js';
 import { HexagonGrid, HexagonGroupFromLayout } from './hexagrids-and-groups.js';
 
 import {
@@ -33,7 +33,7 @@ export class AppPixi extends PIXI.Application {
 
     this.updateHexagonCollections();
 
-    this.addShapeSamples();
+    //this.addShapeSamples();
   }
 
   addSprites(options) {
@@ -47,7 +47,7 @@ export class AppPixi extends PIXI.Application {
   }
 
   addButtons(options) {
-    const button1 = new TextButton({
+    const buttonGrid = new TextButton({
       onClick: (text) => {
         //console.log(text);
         this.gridVisible = !this.gridVisible;
@@ -57,9 +57,9 @@ export class AppPixi extends PIXI.Application {
       y: 50,
       text: 'grid',
     });
-    this.stage.addChild(button1);
+    this.stage.addChild(buttonGrid);
 
-    const button2 = new TextButton({
+    const buttonVH = new TextButton({
       onClick: (text) => {
         //console.log(text);
         this.vertical = !this.vertical;
@@ -69,19 +69,28 @@ export class AppPixi extends PIXI.Application {
       y: 100,
       text: 'v/h',
     });
-    this.stage.addChild(button2);
+    this.stage.addChild(buttonVH);
 
-    const button3 = new CircleButton({
-      onClick: (text) => {
-        console.log('button3', text);
-      },
-      x: options.width - 50,
-      y: 150,
-      radius: 20,
-      text: 'demo',
-      fillcolor: '0xbb0000',
-    });
-    this.stage.addChild(button3);
+    const helpText = `Hexagon grids and movements demo
+    grid: toggle the grid
+    v/h: switch between vertical (pointy) and horizontal (flat) grid
+         vertical: use keys ftzhbv to move 3 sprites
+         horizontal: use keys asdyxc to move 3 sprites
+    `;
+
+    const buttonInfo = new TextButton({
+        onClick: (text) => {
+          console.log('button3', text);
+          alert(helpText);
+        },
+        x: options.width - 50,
+        y: 150,
+        radius: 20,
+        text: 'info',
+        fillcolor: '0xbb0000',
+      });
+      this.stage.addChild(buttonInfo);
+
   }
 
   addHexagonGrids(hexagonSide, options) {
