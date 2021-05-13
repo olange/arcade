@@ -41,7 +41,6 @@
   "workspaces": [
     "../packages/*"
   ],
-  "prettier": "@gongfuio/prettierrc",
   "engines": {
     "node": ">=14"
   },
