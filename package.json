@@ -16,7 +16,8 @@
     "access": "restricted"
   },
   "scripts": {
-    "postinstall": "npm dedupe && run-s install:*",
+    "postinstall": "npm dedupe && run-s install:packages:* install:webapp",
+    "install:packages:hexgrid": "npm --prefix packages/hexgrid install",
     "install:webapp": "npm --prefix webapp install",
     "start": "run-p start:webapp",
     "start:webapp": "npm --prefix webapp run start",
