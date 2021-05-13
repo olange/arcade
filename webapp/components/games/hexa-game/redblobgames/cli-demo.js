@@ -1,3 +1,6 @@
+// TODO: déplacer ce code dans un notebook ObservableHQ,
+// une fois que @gongfuio/hexgrid aura été republié sur NPMJS
+
 import {
   Point,
   Hex,
@@ -5,7 +8,7 @@ import {
   DoubledCoord,
   Orientation,
   Layout,
-} from './lib-module.js';
+} from '@gongfuio/hexgrid';
 
 const point1 = new Point(3, 7);
 console.log('point1=', point1);

@@ -1,4 +1,4 @@
-import { Hex, OffsetCoord, Point } from './redblobgames/lib-module.js';
+import { Hex, OffsetCoord, Point } from '@gongfuio/hexgrid';
 
 /**
  * Adds movement on a hexgonal grid controlled by keys
