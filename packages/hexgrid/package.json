@@ -1,6 +1,6 @@
 {
   "name": "@gongfuio/hexgrid",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "‹Hexgrid› implementation from Red Blob Games (https://www.redblobgames.com/grids/hexagons/implementation.html) packaged as an ES module",
   "author": "Amit Patel",
   "contributors": [
@@ -13,6 +13,7 @@
     "game",
     "hexagrid"
   ],
+  "type": "module",
   "module": "dist/index.js",
   "publishConfig": {
     "access": "public"
@@ -24,17 +25,16 @@
     "format": "prettier --write \"src/**/*.js\"",
     "format:check": "prettier --check \"src/**/*.js\"",
     "lint": "(cd ../.. && npx eslint packages/hexgrid)",
-    "test": "echo \"This package does not include a test runner.\" && exit 1"
+    "test": "node test/index.js"
   },
   "devDependencies": {
     "@gongfuio/prettierrc": "^1.0.0",
-    "prettier": "^2.2.1",
-    "snowpack": "^3.0.13"
+    "prettier": "^2.3.0",
+    "snowpack": "^3.3.7"
   },
   "workspaces": [
     "../prettierrc"
   ],
-  "prettier": "@gongfuio/prettierrc",
   "engines": {
     "node": ">=14"
   },

@@ -1,9 +1,8 @@
 // Snowpack Configuration File
 // See all supported options: https://www.snowpack.dev/reference/configuration
-/* eslint-env node */
 
 /** @type {import("snowpack").SnowpackUserConfig } */
-module.exports = {
+export default {
   mount: {
     "src": { url: "/" }
   },

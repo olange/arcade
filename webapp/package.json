@@ -25,23 +25,22 @@
     "test": "echo \"This package does not include a test runner.\" && exit 1"
   },
   "dependencies": {
-    "@gongfuio/hexgrid": "^0.1.0",
-    "firebase": "^8.2.4",
+    "@gongfuio/hexgrid": "^1.0.0",
+    "firebase": "^8.6.1",
     "lit-element": "^2.4.0",
     "pixi.js": "^5.3.7"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-decorators": "^7.13.5",
+    "@babel/plugin-proposal-decorators": "^7.14.2",
     "@gongfuio/prettierrc": "^1.0.0",
-    "@snowpack/plugin-babel": "^2.1.6",
-    "prettier": "^2.2.1",
-    "snowpack": "^3.0.13"
+    "@snowpack/plugin-babel": "^2.1.7",
+    "prettier": "^2.3.0",
+    "snowpack": "^3.3.7"
   },
   "workspaces": [
     "../packages/*"
   ],
-  "prettier": "@gongfuio/prettierrc",
   "engines": {
     "node": ">=14"
   },

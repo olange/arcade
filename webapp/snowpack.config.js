@@ -4,6 +4,7 @@
 
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
+  workspaceRoot: "../",
   mount: {
     static: { url: "/", static: true },
     components: { url: "/components" }
