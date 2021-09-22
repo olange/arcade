@@ -4,7 +4,7 @@ Restoration of a Pacman Arcade Cocktail table (Karateco 1984) and mashup of a fe
 
 ## Repository structure
 
-This repository has a _monorepo_ layout, holding two projects [`webapp`](webapp/) and [`server`](server/), with shared libraries [`hexgrid`](packages/hexgrid/) and [`prettierrc`](packages/prettierrc/).
+This repository has a _monorepo_ layout, holding two projects [`webapp`](webapp/) and [`server`](server/), with shared library [`hexgrid`](packages/hexgrid/).
 
 ```ascii
 / ..................... NPM & Firebase scripts for global assembly & deployment
@@ -18,7 +18,6 @@ This repository has a _monorepo_ layout, holding two projects [`webapp`](webapp/
 |
 +-- packages
     +-- hexgrid ....... Hexgrid library from Red Blob Games
-    +-- prettierrc .... Shared Prettier config (tooling)
 ```
 
 ## How-to… ?
