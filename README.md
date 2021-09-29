@@ -2,6 +2,10 @@
 
 Restoration of a Pacman Arcade Cocktail table (Karateco 1984) and mashup of a few arcade games, retrofitted to hexagonal grids. 
 
+## Project status
+
+🌱 Early stage of development. Only a landing page with a partial UI is deployed on Firebase. Expect everything to evolve.
+
 ## Repository structure
 
 This repository has a _monorepo_ layout, holding two projects [`webapp`](webapp/) and [`server`](server/), with shared library [`hexgrid`](packages/hexgrid/).
