@@ -7,11 +7,11 @@ import {
   HexagonCR,
   HexagonCRKeyboard,
   Square,
-} from './shapes.js';
+} from '../shapes.js';
 
 import { Circle4, CircleButton, TextButton } from './pixi-buttons.js';
 
-import { HexagonGrid } from './pixi-hexagrids.js';
+import { HexagonGrid } from '../hexagrids-and-groups.js';
 
 export class PixiApplication extends Application {
   constructor(options) {

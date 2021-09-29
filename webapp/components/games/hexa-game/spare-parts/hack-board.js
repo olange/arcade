@@ -27,7 +27,7 @@ import {
   squareText,
   circle,
   pacman,
-} from './assets/hack-shapes';
+} from '../shapes.js';
 
 /**
  * utilities ***********************************
