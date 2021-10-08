@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, internalProperty, property } from 'lit-element';
+import { customElement, state, property } from 'lit-element';
 import firebase from 'firebase/app';
 import { GameButton } from './game-button';
 import { DemoGame } from './games/demo-game/demo-game';
@@ -8,8 +8,8 @@ import { HexaGame } from './games/hexa-game/hexa-game';
 @customElement('app-start')
 export class AppStart extends LitElement {
   @property({ type: String }) href;
-  @internalProperty({ type: Boolean }) loading;
-  @internalProperty({ type: String }) selectedGameId;
+  @state({ type: Boolean }) loading;
+  @state({ type: String }) selectedGameId;
 
   static get styles() {
     return css`

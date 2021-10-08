@@ -1,13 +1,13 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, internalProperty, query } from 'lit-element';
+import { customElement, state, query } from 'lit-element';
 import * as PIXI from 'pixi.js';
 import { AppPixi } from './app-pixi.js';
 
 @customElement('hexa-game')
 export class HexaGame extends LitElement {
-  @internalProperty({ type: Object }) app;
+  @state({ type: Object }) app;
 
-  @internalProperty({ type: Object })
+  @state({ type: Object })
   static pixiAppOptions = {
     backgroundColor: 0xbbccee,
     antialias: true,
