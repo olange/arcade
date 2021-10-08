@@ -12,15 +12,10 @@
  * - static vs. instance methods where these don't use the instance state?
  */
 
-import {
-  LitElement,
-  customElement,
-  html,
-  svg,
-  css,
-  property,
-} from 'lit-element';
+import { LitElement, html, svg, css } from 'lit';
 
+import { customElement, property } from 'lit-element';
+  
 import {
   square,
   squareX,

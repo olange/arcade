@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css } from 'lit';
 import { customElement, internalProperty, query } from 'lit-element';
 import * as PIXI from 'pixi.js';
 

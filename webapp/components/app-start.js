@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit-element';
+import { LitElement, html, css } from 'lit';
 import { customElement, internalProperty, property } from 'lit-element';
 import firebase from 'firebase/app';
 import { GameButton } from './game-button';
