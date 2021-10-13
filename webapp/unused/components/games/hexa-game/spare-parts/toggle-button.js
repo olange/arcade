@@ -1,7 +1,8 @@
 // ToggleButton web component
 // Copyright © 2020 Rudolf Farkas @rudifa
 
-import { customElement, property, LitElement, html, css } from 'lit-element';
+import { LitElement, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
 /**
  * example of use in a parent web component

@@ -1,5 +1,5 @@
-import { LitElement, html, css } from 'lit-element';
-import { customElement, internalProperty, property } from 'lit-element';
+import { LitElement, html, css } from 'lit';
+import { customElement, state, property } from 'lit/decorators.js';
 import firebase from 'firebase/app';
 import { GameButton } from './game-button';
 import { DemoGame } from './games/demo-game/demo-game';
@@ -8,31 +8,29 @@ import { HexaGame } from './games/hexa-game/hexa-game';
 @customElement('app-start')
 export class AppStart extends LitElement {
   @property({ type: String }) href;
-  @internalProperty({ type: Boolean }) loading;
-  @internalProperty({ type: String }) selectedGameId;
+  @state({ type: Boolean }) loading;
+  @state({ type: String }) selectedGameId;
 
-  static get styles() {
-    return css`
-      :host {
-        display: inline-block;
-        margin-bottom: -0.5em;
-      }
-      .link {
-        color: white;
-        background-color: var(--color-theme-primary, #1262b3);
-        padding: 0.5rem 1rem;
-        text-decoration: none;
-        border-radius: 0.5rem;
-      }
-      .unresolved {
-        background-color: var(--color-text-tertiary, rgba(0,0,0,0.1));
-      }
-      game-button {
-        margin-right: 0.5rem;
-        margin-bottom: 1rem;
-      }
-    `;
-  }
+  static styles = css`
+    :host {
+      display: inline-block;
+      margin-bottom: -0.5em;
+    }
+    .link {
+      color: white;
+      background-color: var(--color-theme-primary, #1262b3);
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 0.5rem;
+    }
+    .unresolved {
+      background-color: var(--color-text-tertiary, rgba(0,0,0,0.1));
+    }
+    game-button {
+      margin-right: 0.5rem;
+      margin-bottom: 1rem;
+    }
+  `;
 
   constructor() {
     super();
@@ -54,7 +52,7 @@ export class AppStart extends LitElement {
     console.log( "app-start › retryUntilFirebaseAvailable() called.");
     if( firebase.apps.length === 0) {
       console.log( 'app-start › retryUntilFirebaseAvailable() › Firebase not yet initialized, retrying fetching in 100ms…');
-      setTimeout(() => { this.retryUntilFirebaseAvailable( callback); }, 100);
+      setTimeout(() => { this.retryUntilFirebaseAvailable( callback); }, 100);
     } else {
       // fire & forget, that is, don't await the callback, if it was async;
       // it will trigger re-rendering, by changing the `loading` property

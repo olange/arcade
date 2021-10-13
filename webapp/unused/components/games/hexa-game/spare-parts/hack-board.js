@@ -12,14 +12,8 @@
  * - static vs. instance methods where these don't use the instance state?
  */
 
-import {
-  LitElement,
-  customElement,
-  html,
-  svg,
-  css,
-  property,
-} from 'lit-element';
+import { LitElement, html, svg, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
 import {
   square,
@@ -100,28 +94,26 @@ export class HackBoard extends LitElement {
   @property({ type: Object })
   dictionary = dictionary;
 
-  static get styles() {
-    return css`
-      g.grid {
-        fill: white;
-        stroke: black;
-      }
-      g.cell.odd {
-        fill: #ddffdd;
-      }
-      text {
-        font-size: 2em;
-      }
-      .q-coord {
-        stroke: green;
-        fill: green;
-      }
-      .r-coord {
-        stroke: blue;
-        fill: blue;
-      }
-    `;
-  }
+  static styles = css`
+    g.grid {
+      fill: white;
+      stroke: black;
+    }
+    g.cell.odd {
+      fill: #ddffdd;
+    }
+    text {
+      font-size: 2em;
+    }
+    .q-coord {
+      stroke: green;
+      fill: green;
+    }
+    .r-coord {
+      stroke: blue;
+      fill: blue;
+    }
+  `;
 
   constructor() {
     super();

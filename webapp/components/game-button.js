@@ -1,25 +1,23 @@
-import { LitElement, html, css } from 'lit-element';
-import { customElement, property } from 'lit-element';
+import { LitElement, html, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
 @customElement('game-button')
 export class GameButton extends LitElement {
   @property({ type: String }) name;
 
-  static get styles() {
-    return css`
-      :host {
-        display: inline-block;
-      }
-      .button {
-        color: white;
-        background-color: var(--color-theme-primary, #1262b3);
-        text-decoration: none;
-        border-radius: 0.5rem;
-        display: inline-block;
-        padding: 0.5rem 1rem;
-      }
-    `;
-  }
+  static styles = css`
+    :host {
+      display: inline-block;
+    }
+    .button {
+      color: white;
+      background-color: var(--color-theme-primary, #1262b3);
+      text-decoration: none;
+      border-radius: 0.5rem;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+    }
+  `;
 
   constructor() {
     super();
