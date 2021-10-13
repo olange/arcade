@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit-element';
+import { customElement } from 'lit/decorators.js';
 
 import { Application, Graphics } from 'pixi.js';
 import {
@@ -11,10 +11,7 @@ import {
 } from '../shapes.js';
 
 import { Circle4, CircleButton, TextButton } from './pixi-buttons.js';
-
 import { HexagonGrid } from '../hexagrids-and-groups.js';
-import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit-element';
 
 export class PixiApplication extends Application {
   constructor(options) {

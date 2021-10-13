@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, state, query } from 'lit-element';
+import { customElement, state, query } from 'lit/decorators.js';
 import * as PIXI from 'pixi.js';
 
 @customElement('demo-game')
@@ -18,18 +18,16 @@ export class DemoGame extends LitElement {
   @query('div#container')
   containerEl;
 
-  static get styles() {
-    return css`
-      :host {
-        display: block;
-        height: 100vh;
-      }
-      div#container {
-        width: 100%;
-        height: 100%;
-      }
-    `;
-  }
+  static styles =css`
+    :host {
+      display: block;
+      height: 100vh;
+    }
+    div#container {
+      width: 100%;
+      height: 100%;
+    }
+  `;
 
   constructor() {
     super();
