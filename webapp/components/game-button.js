@@ -25,15 +25,16 @@ export class GameButton extends LitElement {
   }
 
   handleClick(gameName) {
-    this.dispatchEvent(new CustomEvent('selected', {detail: gameName}));
+    this.dispatchEvent(new CustomEvent('selected', { detail: gameName }));
   }
 
   render() {
-    return html`
-      <div class="button"
-           role="button" aria-label="${this.name}"
-           @click=${() => this.handleClick(this.name)}>
-        <slot></slot>
-      </div>`;
+    return html` <div
+      class="button"
+      role="button"
+      aria-label="${this.name}"
+      @click=${() => this.handleClick(this.name)}>
+      <slot></slot>
+    </div>`;
   }
 }

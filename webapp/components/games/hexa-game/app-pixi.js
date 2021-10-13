@@ -79,18 +79,17 @@ export class AppPixi extends PIXI.Application {
     `;
 
     const buttonInfo = new TextButton({
-        onClick: (text) => {
-          console.log('button3', text);
-          alert(helpText);
-        },
-        x: options.width - 50,
-        y: 150,
-        radius: 20,
-        text: 'info',
-        fillcolor: '0xbb0000',
-      });
-      this.stage.addChild(buttonInfo);
-
+      onClick: (text) => {
+        console.log('button3', text);
+        alert(helpText);
+      },
+      x: options.width - 50,
+      y: 150,
+      radius: 20,
+      text: 'info',
+      fillcolor: '0xbb0000',
+    });
+    this.stage.addChild(buttonInfo);
   }
 
   addHexagonGrids(hexagonSide, options) {
@@ -162,16 +161,15 @@ export class AppPixi extends PIXI.Application {
       size: 40,
     });
     this.ticker.add(() => this.verticalMovableRotatingSprite.rotate(0.01));
-    this.horizontalMovableRotatingSprite = new RotatingSpriteOnHexagonCRKeyboard(
-      {
+    this.horizontalMovableRotatingSprite =
+      new RotatingSpriteOnHexagonCRKeyboard({
         col: 11,
         row: 5,
         side: hexagonSide,
         vertical: false,
         imageURL: '/assets/open-wc-logo-180x180.png',
         size: 40,
-      },
-    );
+      });
     this.ticker.add(() => this.horizontalMovableRotatingSprite.rotate(0.01));
   }
 

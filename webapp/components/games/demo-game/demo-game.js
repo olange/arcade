@@ -18,7 +18,7 @@ export class DemoGame extends LitElement {
   @query('div#container')
   containerEl;
 
-  static styles =css`
+  static styles = css`
     :host {
       display: block;
       height: 100vh;
