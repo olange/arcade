@@ -4,7 +4,7 @@ Restoration of a Pacman Arcade Cocktail table (Karateco 1984) and mashup of a fe
 
 ## Project status
 
-🌱 Early stage of development. Only a landing page with a partial UI is deployed on Firebase. Expect everything to evolve.
+🌱 Early stage of development. Only a landing page with a partial UI is deployed on Firebase. Expect everything to evolve. Next to the source code, there are various experiments available and listed from the [homepage of the wiki](https://github.com/olange/arcade/wiki).
 
 ## Repository structure
 
