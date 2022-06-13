@@ -20,16 +20,19 @@
   },
   "scripts": {
     "postinstall": "npm dedupe",
-    "prepare": "npm run build",
+    "prepare": "npm run build && npm run lint:package",
     "build": "snowpack build",
     "format": "prettier --write \"src/**/*.js\"",
     "format:check": "prettier --check \"src/**/*.js\"",
-    "lint": "(cd ../.. && npx eslint packages/hexgrid)",
+    "lint": "npm run lint:sources && npm run lint:package",
+    "lint:sources": "(cd ../.. && npx eslint packages/hexgrid)",
+    "lint:package": "npx package-check",
     "test": "node test/index.js"
   },
   "devDependencies": {
     "prettier": "^2.4.1",
-    "snowpack": "^3.8.8"
+    "snowpack": "^3.8.8",
+    "@skypack/package-check": "^0.2.2"
   },
   "engines": {
     "node": ">=14"
