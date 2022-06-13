@@ -34,9 +34,9 @@
     "deploy": "firebase deploy --only hosting"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "@babel/eslint-parser": "^7.15.8",
-    "eslint": "^8.0.0",
+    "@babel/core": "^7.18.5",
+    "@babel/eslint-parser": "^7.18.2",
+    "eslint": "^8.17.0",
     "npm-run-all": "^4.1.5"
   },
   "engines": {
