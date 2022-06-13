@@ -20,7 +20,7 @@
   },
   "scripts": {
     "postinstall": "npm dedupe",
-    "prepare": "npm run build && npm run lint:package",
+    "prepare": "npm run build",
     "build": "snowpack build",
     "format": "prettier --write \"src/**/*.js\"",
     "format:check": "prettier --check \"src/**/*.js\"",
@@ -30,9 +30,9 @@
     "test": "node test/index.js"
   },
   "devDependencies": {
-    "prettier": "^2.4.1",
-    "snowpack": "^3.8.8",
-    "@skypack/package-check": "^0.2.2"
+    "@skypack/package-check": "^0.2.2",
+    "prettier": "^2.6.2",
+    "snowpack": "^3.8.8"
   },
   "engines": {
     "node": ">=14"
